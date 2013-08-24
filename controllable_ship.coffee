@@ -14,7 +14,6 @@ Crafty.c "TestShip",  {
   init: ->
     this.requires "Ship"
     this.image("assets/testship.png")
-    this.origin(40,40)
     @speed = 1
     @maneuverability = 1
     @armor = 1
