@@ -1,2 +1,2 @@
-ludum_dare_8_13
+Ludum Dare 27 submission
 ===============
