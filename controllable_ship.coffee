@@ -30,5 +30,7 @@ Crafty.c "Controller", {
   activate: ->
     console.log "activated this controller"
   is_valid_drag_position: (x,y) ->
-    return true if x < 100 && y < 100
+    @path = @ship.get_path_to(new Vec2(x,y))
+    return true if @path
+    return false
 }
