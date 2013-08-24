@@ -17,9 +17,7 @@ Crafty.c "Ship", {
       return end_pos: target, center: center, radius: radius, end_time: 1
     else
       this.get_closest_valid_target(target, center,radius)
-      dbg_point(target.x, target.y,"target")
-      dbg_point(center.x, center.y, "center")
-      return null
+      return end_pos: target, center: center, radius: radius, end_time: 1
 
   get_closest_valid_target: (target, center, radius) ->
     dist = this.get_movement_length(target, center, radius)
@@ -48,32 +46,34 @@ Crafty.c "Ship", {
         console.log("to small")
         target_dir = target.clone().subtract(center)
         self_dir = this.get_pos().subtract(center)
-        radians_of = (this.min_move_dist()-dist)/radius
-        new_target_a = target_dir.clone().rotate(radians_of)
-        new_target_b = target_dir.clone().rotate(-radians_of)
-        if self_dir.angleTo(new_target_a) < self_dir.angleTo(new_target_b)
-          target.x = new_target_b.x + center.x
-          target.y = new_target_b.y + center.y
+        min_rad = this.min_move_dist()/radius
+        new_target_a = self_dir.clone().rotate(min_rad)
+        new_target_b = self_dir.clone().rotate(-min_rad)
+        dbg_point(new_target_a.x, new_target_a.y,"targeta")
+        dbg_point(new_target_b.x, new_target_b.y,"targetb")
+        if target_dir.distance(new_target_a) < target_dir.distance(new_target_b)
+          target.x = new_target_a.x + center.x
+          target.y = new_target_a.y + center.y
         else
           target.x = new_target_b.x + center.x
           target.y = new_target_b.y + center.y
+
       if dist > this.max_move_dist() 
         console.log("to big")
         target_dir = target.clone().subtract(center)
         self_dir = this.get_pos().subtract(center)
-        radians_of = (this.min_move_dist()-dist)/radius
-        console.log "correcting #{radians_of}"
-        new_target_a = target_dir.clone().rotate(radians_of)
-        new_target_b = target_dir.clone().rotate(-radians_of)
+        max_rad = this.max_move_dist()/radius
+        new_target_a = self_dir.clone().rotate(max_rad)
+        new_target_b = self_dir.clone().rotate(-max_rad)
 
-        dbg_point(center.x+new_target_a.x, center.y+new_target_a.y, "target a")
-        dbg_point(center.x+new_target_b.x, center.y+new_target_b.y, "target b")
-        if self_dir.angleTo(new_target_a) > self_dir.angleTo(new_target_b)
+        dbg_point(new_target_a.x+center.x, new_target_a.y+center.y,"targeta")
+        dbg_point(new_target_b.x+center.x, new_target_b.y+center.y,"targetb")
+        if target_dir.distance(new_target_a) > target_dir.distance(new_target_b)
           target.x = new_target_b.x + center.x
           target.y = new_target_b.y + center.y
         else
-          target.x = new_target_b.x + center.x
-          target.y = new_target_b.y + center.y
+          target.x = new_target_a.x + center.x
+          target.y = new_target_a.y + center.y
 
   is_valid_target: (target, center, radius) ->
     dist = this.get_movement_length(target, center, radius)
@@ -84,13 +84,13 @@ Crafty.c "Ship", {
   min_turning_radius: ->
     return 100
   max_move_dist: ->
-    return 100
+    return 200
   min_move_dist: ->
-    return 50
+    return 80
 
   get_movement_length: (target, center, radius) -> 
     if center
-      rad = (this.get_pos().subtract(center)).angleTo(target.clone().subtract(center))
+      rad = (this.get_pos().subtract(center)).angleBetween(target.clone().subtract(center))
       return Math.abs(rad*radius)
     else
       return this.get_pos().subtract(target).magnitude()
