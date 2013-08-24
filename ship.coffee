@@ -23,44 +23,51 @@ Crafty.c "Ship", {
     center = steering.center
     radius = steering.radius
 
+    res = {end_pos: target, center: center, radius: radius, end_time: 1}
     if this.is_valid_target(target, center, radius)
-      return end_pos: target, center: center, radius: radius, end_time: 1
+      return res
     else
-      this.get_closest_valid_target(target, center,radius)
-      return end_pos: target, center: center, radius: radius, end_time: 1
+      this.get_closest_valid_target(res)
+      return res
 
-  get_closest_valid_target: (target, center, radius) ->
+  get_closest_valid_target: (res) ->
+    target = res.end_pos
+    center = res.center
+    radius = res.radius
     dist = this.get_movement_length(target, center, radius)
     if !center
-      console.log("no center")
-      if dist > this.max_move_dist() 
+      if dist > this.max_move_dist()
         new_target = this.get_pos().subtract(target).normalize().scale(this.max_move_dist())
         new_target.add this.get_pos()
         target.x = new_target.x
         target.y = new_target.y
-      if dist < this.min_move_dist() 
+      if dist < this.min_move_dist()
         new_target = this.get_pos().subtract(target).normalize().scale(this.min_move_dist())
         new_target.add this.get_pos()
         target.x = new_target.x
         target.y = new_target.y
     else
       if radius < this.min_turning_radius()
-        console.log("rad is of")
-        new_center = target.clone().subtract(this.get_pos()).normalize().scale(this.min_turning_radius())
+        new_center = center.clone().subtract(this.get_pos()).normalize().scale(this.min_turning_radius())
         new_center.add this.get_pos()
         center.x = new_center.x
         center.y = new_center.y
-        radius = this.min_turning_radius
+        target_dir = target.clone().subtract(center)
+        target_dir.scaleToMagnitude(this.min_turning_radius())
+
+        target.x = center.x + target_dir.x
+        target.y = center.y + target_dir.y
+        radius = this.min_turning_radius()
+        res.radius = radius
         dist = this.get_movement_length(target, center, radius)
-      if dist < this.min_move_dist() 
-        console.log("to small")
+        console.log(dist)
+
+      if dist < this.min_move_dist()
         target_dir = target.clone().subtract(center)
         self_dir = this.get_pos().subtract(center)
         min_rad = this.min_move_dist()/radius
         new_target_a = self_dir.clone().rotate(min_rad)
         new_target_b = self_dir.clone().rotate(-min_rad)
-        dbg_point(new_target_a.x, new_target_a.y,"targeta")
-        dbg_point(new_target_b.x, new_target_b.y,"targetb")
         if target_dir.distance(new_target_a) < target_dir.distance(new_target_b)
           target.x = new_target_a.x + center.x
           target.y = new_target_a.y + center.y
@@ -68,16 +75,13 @@ Crafty.c "Ship", {
           target.x = new_target_b.x + center.x
           target.y = new_target_b.y + center.y
 
-      if dist > this.max_move_dist() 
-        console.log("to big")
+      if dist > this.max_move_dist()
         target_dir = target.clone().subtract(center)
         self_dir = this.get_pos().subtract(center)
         max_rad = this.max_move_dist()/radius
         new_target_a = self_dir.clone().rotate(max_rad)
         new_target_b = self_dir.clone().rotate(-max_rad)
 
-        dbg_point(new_target_a.x+center.x, new_target_a.y+center.y,"targeta")
-        dbg_point(new_target_b.x+center.x, new_target_b.y+center.y,"targetb")
         if target_dir.distance(new_target_a) > target_dir.distance(new_target_b)
           target.x = new_target_b.x + center.x
           target.y = new_target_b.y + center.y
@@ -98,7 +102,7 @@ Crafty.c "Ship", {
   min_move_dist: ->
     return 80
 
-  get_movement_length: (target, center, radius) -> 
+  get_movement_length: (target, center, radius) ->
     if center
       rad = (this.get_pos().subtract(center)).angleBetween(target.clone().subtract(center))
       return Math.abs(rad*radius)
@@ -118,11 +122,11 @@ Crafty.c "Ship", {
     l2_p1 = halfway
     l2_p2 = target_dir.rotate_90().scale(10).add(halfway)
     center = this.checkLineIntersection(l1_p1,l1_p2,  l2_p1,l2_p2)
-    return center: center, radius: center and center.distance(pos) 
+    return center: center, radius: center and center.distance(pos)
 
 
   checkLineIntersection: (line1_start,line1_end, line2_start, line2_end) ->
-    denominator = ((line2_end.y - line2_start.y) * (line1_end.x - line1_start.x)) - 
+    denominator = ((line2_end.y - line2_start.y) * (line1_end.x - line1_start.x)) -
         ((line2_end.x - line2_start.x) * (line1_end.y - line1_start.y))
     if denominator == 0
         return null

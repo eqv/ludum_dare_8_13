@@ -23,7 +23,7 @@ Crafty.c "TestShip",  {
 
 Crafty.c "Controller", {
   init: ->
-    this.requires "2D, DOM, Image, RestrictedDraggable, Color" 
+    this.requires "2D, DOM, Image, RestrictedDraggable, Color"
     #this.image "assets/move_target.png"
     #this.bind "Dragging", this.drag
     this.color( "#00ff00")
@@ -35,7 +35,6 @@ Crafty.c "Controller", {
     this.y= pos.y
     this.w  = 5
     this.h  = 5
-    dbg_point(pos.x, pos.y, "controller")
     console.log "activated this controller"
 
   is_valid_drag_position: (x,y) ->

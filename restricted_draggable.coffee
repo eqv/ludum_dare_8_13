@@ -25,7 +25,6 @@ Crafty.c "RestrictedDraggable", {
       next_x = this._oldX + (pos.x - this._origMouseDOMPos.x);
       next_y = this._oldY + (pos.y - this._origMouseDOMPos.y);
       vec = this.is_valid_drag_position(next_x,next_y)
-      console.log(vec)
       this.x = vec.x
       this.y = vec.y
       this.trigger("Dragging", e);
