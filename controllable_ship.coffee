@@ -28,8 +28,14 @@ Crafty.c "TestShip",  {
 
 Crafty.c "Controller", {
   init: ->
-    this.requires "2D, DOM, Image, Draggable"
-    this.image("assets/move_target.png")
+    this.requires "2D, DOM, Image, RestrictedDraggable"
+    this.image "assets/move_target.png"
+    this.bind "Dragging", this.drag
+    this.enableDrag()
   activate: ->
     console.log "activated this controller"
+  drag: (event) ->
+    console.log event
+  is_valid_drag_position: (x,y) ->
+    return true if x < 100 && y < 100
 }
