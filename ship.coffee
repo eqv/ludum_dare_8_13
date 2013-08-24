@@ -4,7 +4,7 @@ Crafty.c "Ship", {
     this.bind "Change", () -> this.origin("center");
 
   get_dir: ()->
-    return (new Vec2(1,0)).rotate(@_rotation)
+    return (new Vec2(1,0)).rotate(degToRad(@_rotation))
 
   get_pos: ()->
     return new Vec2(@x+@w/2,@y+@h/2)
@@ -24,11 +24,15 @@ Crafty.c "Ship", {
     radius = steering.radius
 
     res = {end_pos: target, center: center, radius: radius, end_time: 1}
-    if this.is_valid_target(target, center, radius)
-      return res
-    else
+    if !this.is_valid_target(target, center, radius)
       this.get_closest_valid_target(res)
-      return res
+    #test if the new target is still in front of the spaceship
+    target_dir = res.end_pos.clone().subtract(this.get_pos())
+    dot = target_dir.dotProduct(this.get_dir()) 
+    console.log dot
+    if dot < 0
+      return null
+    return res
 
   get_closest_valid_target: (res) ->
     target = res.end_pos
@@ -60,7 +64,6 @@ Crafty.c "Ship", {
         radius = this.min_turning_radius()
         res.radius = radius
         dist = this.get_movement_length(target, center, radius)
-        console.log(dist)
 
       if dist < this.min_move_dist()
         target_dir = target.clone().subtract(center)

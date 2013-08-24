@@ -6,12 +6,12 @@ levels[1] =
     type: "TestShip"
     x: 320
     y: 240
-    rot: 0
+    rot: 20
   ],
   npcs: [
     type: "TestShip"
     x: 150
-    y: 0
+    y: 100
     rot: 90
   ]
 
@@ -22,7 +22,7 @@ class Level
     for ship in @ships
       Crafty.e("ControllableShip, " + ship.type).attr(rotation: ship.rot).set_pos(ship.x, ship.y)
     for npc in @npcs
-      Crafty.e(npc.type).attr(x: npc.x, y: npc.y, rotation: npc.rot).set_pos(npc.x, npc.y)
+      Crafty.e( npc.type).attr(x: npc.x, y: npc.y, rotation: npc.rot).set_pos(npc.x, npc.y)
 
 startScene = (i) ->
   currentLevel = new Level levels[i]
