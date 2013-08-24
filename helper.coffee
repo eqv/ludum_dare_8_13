@@ -7,10 +7,11 @@ Vec2.prototype.rotate = (rad) ->
     rot_mat = new Crafty.math.Matrix2D().rotate(rad)
     return rot_mat.apply(this.clone())
 
+Vec2.prototype.asArray = () -> [@x, @y]
 
- degToRad = (deg) ->
+degToRad = (deg) ->
   return deg*Math.PI/180
 
- radToDeg = (rad) ->
+radToDeg = (rad) ->
   return rad*180/Math.PI
 

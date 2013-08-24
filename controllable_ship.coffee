@@ -17,7 +17,7 @@ Crafty.c "TestShip",  {
     @speed = 1
     @maneuverability = 1
     @armor = 1
-    @weapons = []
+    @weapons = [Crafty.e("Weapon").weapon(0, 0, 0, 90, 10, this)]
     @shields = 1
 }
 
