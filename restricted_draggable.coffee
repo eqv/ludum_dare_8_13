@@ -18,7 +18,6 @@ Crafty.c "RestrictedDraggable", {
     this.requires "Mouse"
 
   _ondrag: (e) ->
-      console.log "drag"
       pos = Crafty.DOM.translate(e.clientX, e.clientY);
       # ignore invalid 0 0 position - strange problem on ipad
       if (pos.x == 0 || pos.y == 0)
@@ -31,13 +30,11 @@ Crafty.c "RestrictedDraggable", {
         this.trigger("Dragging", e);
 
   _ondown: (e) ->
-    console.log "down"
     if (e.mouseButton != Crafty.mouseButtons.LEFT)
       return
     this._startDrag(e);
 
   _onup: (e) ->
-    console.log "up"
     if (this._dragging == true)
       Crafty.removeEvent(this, Crafty.stage.elem, "mousemove", this._ondrag);
       Crafty.removeEvent(this, Crafty.stage.elem, "mouseup", this._onup);
