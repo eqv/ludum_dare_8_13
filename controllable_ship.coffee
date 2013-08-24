@@ -1,13 +1,11 @@
 Crafty.c "Ship", {
   init: ->
     this.requires "2D,DOM,Image"
-    this.image("assets/testship.png")
   }
 
 Crafty.c "ControllableShip", {
   init: ->
     this.requires "Ship, Mouse"
-    console.log("initing a ship")
     this.bind "Click", this.on_click
     @controller = Crafty.e "Controller"
     @controller.ship = this
@@ -17,8 +15,16 @@ Crafty.c "ControllableShip", {
     @controller.activate()
   }
 
+Crafty.c "TestShip",  {
+  init: ->
+    this.requires "Ship"
+    this.image("assets/testship.png")
+}
+
 Crafty.c "Controller", {
   init: ->
     this.requires "2D, DOM, Image, Draggable"
     this.image("assets/move_target.png")
+  activate: ->
+    console.log "activated this controller"
 }
