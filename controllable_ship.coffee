@@ -1,8 +1,3 @@
-Crafty.c "Ship", {
-  init: ->
-    this.requires "2D,DOM,Image"
-  }
-
 Crafty.c "ControllableShip", {
   init: ->
     this.requires "Ship, Mouse"
