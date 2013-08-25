@@ -32,7 +32,7 @@ Crafty.c "Controller", {
   controller: (ship) ->
     @ship = ship
     pos = @ship.get_pos().add(@ship.get_dir().scale( (@ship.min_move_dist()+@ship.max_move_dist())/2 ))
-    this.set_path(end_pos: pos, center: null, radius: null)
+    this.set_path(end_pos: pos, center: null, radius: null, end_time: 1)
     this.x= pos.x
     this.y= pos.y
     this.w  = 5
