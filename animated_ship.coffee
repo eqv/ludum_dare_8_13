@@ -16,7 +16,7 @@ Crafty.c "AnimatedShip", {
     this.bind "EnterFrame", this.on_frame
     @start = Date.now()
     @start_frame =
-      end_pos: new Vec2(@x, @y)
+      end_pos: this.get_pos()
       end_time: 0
       end_rot: @rotation
 
@@ -44,13 +44,13 @@ Crafty.c "AnimatedShip", {
         b = next_frame.end_pos.clone().subtract(next_frame.rot_center)
         angle = progress * b.angleBetween(a) + a.angleBetween(new Vec2(1, 0))
         vec = next_frame.rot_center.clone().add(new Vec2(Math.cos(angle), -Math.sin(angle)).scaleToMagnitude next_frame.radius)
-        @x = vec.x
-        @y = vec.y
+        this.set_pos vec
       else
-        @x = (1 - progress) * current_frame.end_pos.x + progress * next_frame.end_pos.x
-        @y = (1 - progress) * current_frame.end_pos.y + progress * next_frame.end_pos.y
+        x = (1 - progress) * current_frame.end_pos.x + progress * next_frame.end_pos.x
+        y = (1 - progress) * current_frame.end_pos.y + progress * next_frame.end_pos.y
+        this.set_pos x, y
     else
       @rotation = current_frame.end_rot
-      @x = current_frame.end_pos.x
-      @y = current_frame.end_pos.y
+      this.set_pos current_frame.end_pos
+      this.removeComponent "AnimatedShip"
 }

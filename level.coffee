@@ -90,7 +90,6 @@ class Level
   get_ships_of: (team) ->
     return (ship for ship in @ships when ship.team == team.name)
 
-
 startScene = (i) ->
   currentLevel = new Level levels[i]
   currentLevel.planning_phase()
