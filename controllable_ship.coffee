@@ -4,6 +4,8 @@ Crafty.c "ControllableShip", {
     this.bind "Click", this.on_click
     @controller = Crafty.e "Controller"
     @controller.ship = this
+  uninit: ->
+    @controller.destroy()
 
   on_click: ->
     console.log "clicked"
@@ -29,13 +31,14 @@ Crafty.c "Controller", {
     this.color( "#00ff00")
 
   activate: ->
+    return if @active
+    @active = true
     this.enableDrag()
     pos = @ship.get_pos().add(@ship.get_dir().scale( (@ship.min_move_dist()+@ship.max_move_dist())/2 ))
     this.x= pos.x
     this.y= pos.y
     this.w  = 5
     this.h  = 5
-    console.log "activated this controller"
 
   is_valid_drag_position: (x,y) ->
     @path = @ship.get_path_to(new Vec2(x,y))
