@@ -43,6 +43,7 @@ Crafty.c "Controller", {
   activate: ->
     for controller_id in Crafty("Controller")
       Crafty(controller_id).deactivate()
+    Crafty.viewport.centerOn(@ship,0)
     @alpha = 1
     @active = true
 

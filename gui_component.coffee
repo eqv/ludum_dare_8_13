@@ -5,19 +5,21 @@ Crafty.c "ViewportStatic",{
     startGui : () ->
       this.requires("2D");
       this.bind "EnterFrame", ->
-        @x = -Crafty.viewport.x + @xOff;
-        @y = -Crafty.viewport.y + @yOff;
-        console.log this.x, this.y
+        relative_x = -Crafty.viewport.x + @xOff;
+        relative_y = -Crafty.viewport.y + @yOff;
+        if @_x !=  relative_x || @_y != relative_y
+          @x = relative_x
+          @y = relative_y
   }
 
 Crafty.c "NextTurnButton", {
   init: () ->
-    this.requires("2D, DOM, Image, Mouse")
+    this.requires("2D, DOM, Image, Mouse, ViewportStatic")
     this.image("assets/next_turn.png")
     @xOff = 20
     @yOff = 20
     this.bind "Click" , this.on_click
-    #this.startGui()
+    this.startGui()
   on_click : (e) ->
     count_unused_ships = 0
     for ship_id in Crafty("ControllableShip")
@@ -27,6 +29,6 @@ Crafty.c "NextTurnButton", {
       ok = confirm("you have unused ships, do you really want to continue?")
     currentLevel.next_planning_turn() if ok
   }
-  
+
 
 
