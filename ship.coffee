@@ -29,7 +29,6 @@ Crafty.c "Ship", {
     #test if the new target is still in front of the spaceship
     target_dir = res.end_pos.clone().subtract(this.get_pos())
     dot = target_dir.dotProduct(this.get_dir()) 
-    console.log dot
     if dot < 0
       return null
     return res

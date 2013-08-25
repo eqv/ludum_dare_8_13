@@ -39,7 +39,7 @@ Crafty.c "Controller", {
 
   is_valid_drag_position: (x,y) ->
     @path = @ship.get_path_to(new Vec2(x,y))
-    @ship.path = @path if @path
+    @ship.keyframes = [@path] if @path
     return @path.end_pos  if @path
     return null
 }
