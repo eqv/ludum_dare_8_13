@@ -1,15 +1,26 @@
 Crafty.c "ControllableShip", {
   init: ->
     this.requires "Ship, Mouse"
-    this.bind "Click", this.on_click
-    @controller = Crafty.e "Controller"
-    @controller.controller(this)
+    if this.is_alive()
+      this.bind "Click", this.on_contrallable_ship_on_click
+      @controller = Crafty.e "Controller"
+      @controller.controller(this)
+    else
+      pos = this.get_pos().add(this.get_dir().scale(this.get_min_move_dist()))
+      @keyframes = [{end_pos: pos, center: null, radius: null, end_time: 1}]
 
-  on_click: ->
+  controllable_ship_on_click: ->
     this.unbind "Click", this.on_click
-    console.log "clicked"
-    @controller.activate()
+    @controller.activate() if @controller
+
+  remove_controll: () ->
+      this.unbind "Click", this.on_contrallable_ship_on_click
+      @controller.destroy() if @controller
+      @controller = null
+      this.removeComponent("ControllableShip")
+
   }
+
 
 
 Crafty.c "Controller", {
@@ -19,11 +30,10 @@ Crafty.c "Controller", {
     @w = 32
     @h = 32
     this.origin("center")
-    #this.bind "Dragging", this.drag
 
   controller: (ship) ->
     @ship = ship
-    pos = @ship.get_pos().add(@ship.get_dir().scale( (@ship.min_move_dist()+@ship.max_move_dist())/2 ))
+    pos = @ship.get_pos().add(@ship.get_dir().scale( (@ship.get_min_move_dist()+@ship.get_max_move_dist())/2 ))
     this.set_path(end_pos: pos, center: null, radius: null, end_time: 1)
     this.x= pos.x
     this.y= pos.y
