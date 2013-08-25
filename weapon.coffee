@@ -30,9 +30,11 @@ Crafty.c "Weapon", {
     new Crafty.polygon pos1.asArray(), pos2.asArray(), pos3.asArray()
 
   build_bullet: (vx, vy) ->
-    Crafty.e("Bullet").attr({ x: @x, y: @y, vx: vx, vy: vy,
-                              width: @width, color_tail: @color_tail, color_head: @color_head,
-                              duration: @duration, armor_dmg: @armor_dmg, shield_dmg: @shield_dmg}).bullet(@ship.team)
+    Crafty.e("Bullet").attr(
+                             x: @x, y: @y, vx: vx, vy: vy,
+                             width: @width, color_tail: @color_tail, color_head: @color_head,
+                             duration: @duration, armor_dmg: @armor_dmg, shield_dmg: @shield_dmg
+                           ).bullet(@ship.team)
 
   on_frame: () ->
     if currentLevel? and currentLevel.state == "animating"
