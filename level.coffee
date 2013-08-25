@@ -87,7 +87,6 @@ class Level
       return true
     return false
 
-
   get_ships_of: (team) ->
     return (ship for ship in @ships when ship.team == team.name)
 
