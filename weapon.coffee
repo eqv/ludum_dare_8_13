@@ -30,9 +30,11 @@ Crafty.c "Weapon", {
     new Crafty.polygon pos1.asArray(), pos2.asArray(), pos3.asArray()
 
   build_bullet: (vx, vy) ->
-    Crafty.e("Bullet").attr({ x: @x, y: @y, vx: vx, vy: vy,
-                              width: @width, color_tail: @color_tail, color_head: @color_head,
-                              duration: @duration, armor_dmg: @armor_dmg, shield_dmg: @shield_dmg}).bullet(@ship.team)
+    Crafty.e("Bullet").attr(
+                             x: @x, y: @y, vx: vx, vy: vy,
+                             width: @width, color_tail: @color_tail, color_head: @color_head,
+                             duration: @duration, armor_dmg: @armor_dmg, shield_dmg: @shield_dmg
+                           ).bullet(@ship.team)
 
   on_frame: () ->
     if currentLevel? and currentLevel.state == "animating"
@@ -43,8 +45,9 @@ Crafty.c "Weapon", {
         for ship in currentLevel.ships
           if ship.team == @ship.team or not ship.is_alive()
             continue
-          if @box.containsPoint ship.x, ship.y
+          sp = ship.get_pos()
+          if @box.containsPoint sp.x, sp.y
             @charge = 0
-            dir = new Vec2(ship.x, ship.y).subtract(new Vec2 @x, @y).scaleToMagnitude(@speed)
+            dir = sp.subtract(new Vec2 @x, @y).scaleToMagnitude(@speed)
             this.build_bullet(dir.x, dir.y)
 } 
