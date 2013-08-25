@@ -42,16 +42,18 @@ class Level
         team.name = team_desc.name
         @teams[i] = team
 
+  revoke_controlls: ->
+    for ship_id in Crafty("Ship")
+      Crafty(ship_id).revoke_controll()
   planning_turn: (team) ->
     for ship_id in Crafty("Ship")
       ship = Crafty(ship_id)
       if ship.team == team.name
-        ship.addComponent("ControllableShip")
-      else
-        ship.removeComponent("ControllableShip")
+        ship.grant_controll()
     team.planning_turn()
 
   next_planning_turn: () ->
+    this.revoke_controlls()
     if @current_team >= @teams.length
       this.animation_phase()
     else

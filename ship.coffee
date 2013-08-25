@@ -3,6 +3,15 @@ Crafty.c "Ship", {
     this.requires "2D,DOM,Image"
     this.bind "Change", () -> this.origin("center");
 
+  revoke_controll: () ->
+    if @controller
+      @controller.destroy()
+      @controller = null
+    this.removeComponent("ControllableShip")
+
+  grant_controll: () ->
+    this.addComponent("ControllableShip")
+
   get_dir: ()->
     return (new Vec2(1,0)).rotate(degToRad(@_rotation))
 
@@ -28,7 +37,7 @@ Crafty.c "Ship", {
       this.get_closest_valid_target(res)
     #test if the new target is still in front of the spaceship
     target_dir = res.end_pos.clone().subtract(this.get_pos())
-    dot = target_dir.dotProduct(this.get_dir()) 
+    dot = target_dir.dotProduct(this.get_dir())
     if dot < 0
       return null
     return res

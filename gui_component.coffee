@@ -19,7 +19,13 @@ Crafty.c "NextTurnButton", {
     this.bind "Click" , this.on_click
     #this.startGui()
   on_click : (e) ->
-    currentLevel.next_planning_turn()
+    count_unused_ships = 0
+    for ship_id in Crafty("ControllableShip")
+      count_unused_ships += 1 if !Crafty(ship_id).controller.active
+    ok = true
+    if count_unused_ships > 0
+      ok = confirm("you have unused ships, do you really want to continue?")
+    currentLevel.next_planning_turn() if ok
   }
   
 
