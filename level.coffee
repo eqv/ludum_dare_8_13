@@ -4,21 +4,21 @@ currentLevel = null
 levels[1] =
   ships: [
     {
-      type: "TestShip"
+      type: "BattleShip"
       x: 320
       y: 240
       rot: 20
       team: "coco"
     },
     {
-      type: "TestShip"
+      type: "Cruiser"
       x: 150
       y: 100
       rot: 90
       team: "eugen"
     },
     {
-      type: "TestShip"
+      type: "Fighter"
       x: 100
       y: 120
       rot: 30
