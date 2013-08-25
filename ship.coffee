@@ -1,7 +1,6 @@
 Crafty.c "Ship", {
   init: ->
     this.requires "2D,DOM,Image"
-    this.bind "Change", () -> this.origin("center");
 
   revoke_controll: () ->
     if @controller

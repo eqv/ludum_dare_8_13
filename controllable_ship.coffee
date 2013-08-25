@@ -15,10 +15,11 @@ Crafty.c "TestShip",  {
   init: ->
     this.requires "Ship"
     this.image("assets/testship.png")
+    this.origin(120/2, 55/2)
     @speed = 1
     @maneuverability = 1
     @armor = 1
-    @weapons = [Crafty.e("Weapon").weapon(0, 0, 0, 90, 10, this)]
+    @weapons = [Crafty.e("Weapon").attr(x: 50, y: 0, rotation: 0).weapon(90, 10, this)]
     @shields = 1
 }
 
