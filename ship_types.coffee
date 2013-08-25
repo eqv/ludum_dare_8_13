@@ -31,7 +31,7 @@ Crafty.c "Fighter", {
     @w = 26
     @h = 30
     this.origin("center")
-    @weapons = [Crafty.e("Weapon").attr(x: 50, y: 14, rotation: 45).weapon(120, 2000, this)]
+    @weapons = [Crafty.e("StandardWeapon").attr(x: 50, y: 14, rotation: 45).weapon(this)]
 }
 
 
@@ -50,7 +50,7 @@ Crafty.c "Cruiser", {
     @w = 64
     @h = 31
     this.origin("center")
-    @weapons = [Crafty.e("Weapon").attr(x: 50, y: 14, rotation: 45).weapon(120, 2000, this)]
+    @weapons = [Crafty.e("StandardWeapon").attr(x: 50, y: 14, rotation: 45).weapon(this)]
 }
 
 
@@ -69,5 +69,5 @@ Crafty.c "BattleShip", {
     @w = 185
     @h = 84
     this.origin("center")
-    @weapons = [Crafty.e("Weapon").attr(x: 50, y: 14, rotation: 45).weapon(120, 2000, this)]
+    @weapons = [Crafty.e("StandardWeapon").attr(x: 50, y: 14, rotation: 45).weapon(this)]
 }
