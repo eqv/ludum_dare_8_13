@@ -3,7 +3,8 @@ bullet_last_update = 0
 Crafty.c "Bullet", {
   init: () ->
     this.requires "2D, Collision"
-    @start_time = Date.now()
+    @now = @start_time = Date.now()
+    @animating = true
     @c = $ "bullet_canvas"
     if not c?
       @c = document.createElement "canvas"
@@ -25,13 +26,15 @@ Crafty.c "Bullet", {
     @start_pos = new Vec2 @x, @y
 
   stop: () ->
-    @animating = false
-    @duration -= Date.now() - @start_time
-    @start_time = Date.now()
+    if @animating
+      @animating = false
+      @now = Date.now()
+      @duration -= @now - @start_time
 
   start: () ->
-    @animating = true
-    @start_time = Date.now()
+    if not @animating
+      @animating = true
+      @start_time = Date.now()
 
   on_frame: (e) ->
     if bullet_last_update < e.frame
@@ -39,9 +42,17 @@ Crafty.c "Bullet", {
       @ctx.setTransform 1, 0, 0, 1, 0, 0
       @ctx.clearRect 0, 0, @c.width, @c.height
       @ctx.setTransform 1, 0, 0, 1, Crafty.viewport.x, Crafty.viewport.y
-    if Date.now() - @start_time < @duration
-      @x += @vx
-      @y += @vy
+
+    if currentLevel.state == "planning"
+      this.stop()
+    else if currentLevel.state == "animating"
+      this.start()
+
+    @now = if @animating then Date.now() else @now
+    if @now - @start_time < @duration
+      if @animating
+        @x += @vx
+        @y += @vy
       len = @start_pos.distance new Vec2(@x, @y)
       if len > 80
         @start_pos.scale(80/len).add new Vec2(@x, @y).scale(1 - 80/len)
@@ -55,7 +66,7 @@ Crafty.c "Bullet", {
       @ctx.moveTo(@start_pos.x, @start_pos.y)
       @ctx.lineTo(@x, @y)
       @ctx.stroke()
-    else if not @animating
+    else if @animating
       this.destroy()
 
   on_hit: (e) ->

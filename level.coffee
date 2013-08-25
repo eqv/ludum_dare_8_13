@@ -38,9 +38,9 @@ class Level
       ship.team = ship_desc.team
       @ships[i] = ship
     for team_desc,i in lvl.teams
-        team = Crafty.e(team_desc.type)
-        team.name = team_desc.name
-        @teams[i] = team
+      team = Crafty.e(team_desc.type)
+      team.name = team_desc.name
+      @teams[i] = team
 
   revoke_controlls: ->
     for ship_id in Crafty("Ship")
