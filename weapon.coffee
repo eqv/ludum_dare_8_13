@@ -1,10 +1,10 @@
 Crafty.c "Weapon", {
   init: () ->
-    this.requires "2D"
+    this.requires "2D, Collision"
     @arc = 90
     @reload_time = 1
     @charge = 1
-    @speed = 3
+    @speed = 5
     @dmg = 1
     @duration = 5000
     @range = 300
@@ -29,7 +29,7 @@ Crafty.c "Weapon", {
     new Crafty.polygon pos1.asArray(), pos2.asArray(), pos3.asArray()
 
   on_frame: () ->
-    if currentLevel.state == "animating"
+    if currentLevel? and currentLevel.state == "animating"
       now = Date.now()
       @charge = Math.min @reload_time, @charge + now - @last_frame
       @last_frame = now
