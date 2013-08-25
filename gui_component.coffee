@@ -91,5 +91,9 @@ Crafty.c "ShipIcon", {
 
 
   on_click: ->
+    w = Crafty.viewport.width
+    h = Crafty.viewport.height
+    Crafty.viewport.x = -(@ship.get_pos().x-w/2)
+    Crafty.viewport.y = -(@ship.get_pos().y-h/2)
     @ship.controller.activate()
   }

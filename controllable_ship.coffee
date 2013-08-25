@@ -28,12 +28,13 @@ Crafty.c "Controller", {
     this.w  = 5
     this.h  = 5
     this.enableDrag()
+    this.bind "DragStart",->Crafty.viewport.lookmouse(false)
+    this.bind "DragEnd",->Crafty.viewport.lookmouse(true)
     @alpha = 0.4
 
   activate: ->
     for controller_id in Crafty("Controller")
       Crafty(controller_id).deactivate()
-    Crafty.viewport.centerOn(@ship,0)
     @alpha = 1
     @active = true
     @selected = true

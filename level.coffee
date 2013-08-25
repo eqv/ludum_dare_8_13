@@ -111,6 +111,7 @@ class Level
 
 startScene = (i) ->
   currentLevel = new Level levels[i]
+  Crafty.viewport.mouselook(true)
   currentLevel.planning_phase()
 
 Crafty.scene("level_" + i, startScene.bind(null, i)) for i in [1..5]
