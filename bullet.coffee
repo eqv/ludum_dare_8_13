@@ -20,9 +20,10 @@ Crafty.c "Bullet", {
     this.collision new Crafty.polygon [0, 0]
     this.onHit "Ship", this.on_hit.bind this
 
-  bullet: (duration, dmg) ->
+  bullet: (duration, dmg, my_team) ->
     @duration = duration
     @dmg = dmg
+    @my_team = my_team
     @start_pos = new Vec2 @x, @y
 
   stop: () ->
@@ -70,6 +71,8 @@ Crafty.c "Bullet", {
       this.destroy()
 
   on_hit: (e) ->
-    @duration = 0
-    e[0].obj.destroy()
+    for s in e
+      if s.obj.team != @my_team
+        @duration = 0
+        s.obj.destroy()
 }
