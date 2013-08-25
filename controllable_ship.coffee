@@ -11,17 +11,6 @@ Crafty.c "ControllableShip", {
     @controller.activate()
   }
 
-Crafty.c "TestShip",  {
-  init: ->
-    this.requires "Ship"
-    this.image("assets/testship.png")
-    @speed = 1
-    @maneuverability = 1
-    @armor = 1
-    @weapons = [Crafty.e("Weapon").weapon(0, 0, 0, 90, 10, this)]
-    @shields = 1
-}
-
 Crafty.c "Controller", {
   init: ->
     this.requires "2D, DOM, Image, RestrictedDraggable, Color"
@@ -46,9 +35,13 @@ Crafty.c "Controller", {
     Crafty.viewport.centerOn(@ship,0)
     @alpha = 1
     @active = true
+    @selected = true
+    @ship.trigger("SelectedShip")
 
   deactivate: ->
     @alpha = 0.4
+    @selected = false
+    @ship.trigger("DeselectedShip")
 
   set_path: (path) ->
     @path = path
@@ -57,7 +50,7 @@ Crafty.c "Controller", {
   is_valid_drag_position: (x,y) ->
     this.activate()
     @alpha = 1
-    path = @ship.get_path_to(new Vec2(x,y)) 
+    path = @ship.get_path_to(new Vec2(x,y))
     this.set_path(path)
     return path.end_pos if path
     return null

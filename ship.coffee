@@ -1,6 +1,38 @@
+Crafty.c "Damagable", {
+
+  init: () ->
+    @body_stat = @armor
+    @shield_stat = @shields
+
+  take_dmg: (weapon) ->
+    this.trigger("DamageTaken")
+    @was_damaged = true
+    if @shield > 0
+      @shield_stat -= weapon.shield_dmg(this)
+    else
+      @body -= weapon.body_dmg(this)
+
+  regen_shields: () ->
+    if @shield_stat > 0 && @shield_stat < @shields
+      @shield_stat += Math.min(@shilds - @shield_stat, @shield_regen)
+    else
+      if !@was_damaged
+        @shield_stat = @shield_capacity
+    @was_damaged = false
+
+  get_shield_factor: () ->
+    return @shield_stat / @shield
+  get_body_factor:  () ->
+    return @body_stat / @armor
+
+
+  is_alive: () ->
+    return @body_stat > 0
+}
+
 Crafty.c "Ship", {
   init: ->
-    this.requires "2D,DOM,Image"
+    this.requires "2D,DOM, Image, Damagable"
     this.bind "Change", () -> this.origin("center");
 
   revoke_controll: () ->

@@ -16,8 +16,15 @@ levels[1] =
       y: 100
       rot: 90
       team: "eugen"
+    },
+    {
+      type: "TestShip"
+      x: 100
+      y: 120
+      rot: 30
+      team: "eugen"
     }
-  ]
+  ],
   teams: [
     {
       name: "eugen"
@@ -33,18 +40,25 @@ class Level
   constructor: (lvl) ->
     @ships = []
     @teams = []
-    for ship_desc,i in lvl.ships
-      ship = Crafty.e(ship_desc.type).attr(rotation: ship_desc.rot).set_pos(ship_desc.x, ship_desc.y)
-      ship.team = ship_desc.team
-      @ships[i] = ship
+    @teams_by_name = {}
     for team_desc,i in lvl.teams
         team = Crafty.e(team_desc.type)
         team.name = team_desc.name
         @teams[i] = team
+        @teams_by_name[team_desc.name] = team
+    for ship_desc,i in lvl.ships
+      ship = Crafty.e(ship_desc.type)
+      ship.attr(rotation: ship_desc.rot)
+      ship.set_pos(ship_desc.x, ship_desc.y)
+      ship.team = ship_desc.team
+      ship.ship_id = @teams_by_name[ship_desc.team].fleet.length
+      @teams_by_name[ship_desc.team].fleet.push(ship)
+      @ships[i] = ship
 
   revoke_controlls: ->
     for ship_id in Crafty("Ship")
       Crafty(ship_id).revoke_controll()
+
   planning_turn: (team) ->
     for ship_id in Crafty("Ship")
       ship = Crafty(ship_id)
@@ -71,12 +85,10 @@ class Level
 
   animation_phase: () ->
     @state = "animating"
-    for gui_id in Crafty("NextTurnButton")
-      Crafty(gui_id).destroy()
     for ship_id in Crafty("Ship")
       ship = Crafty(ship_id)
       ship.addComponent("AnimatedShip")
-    
+
   ship_finished_animating: () ->
     count_unfinished_ships = 0
     for ship in Crafty("Ship")
