@@ -46,7 +46,7 @@ Crafty.c "StatusBar", {
     @xOff = icon.xOff + (attr.xOff || 0)
     @yOff = icon.yOff + (attr.yOff || 0)
     @h = attr.h || 2
-    @w = attr.factor*32 || 32
+    @w = attr.factor * 32
     this.color(attr.color || "#f00")
     this.startGui()
 }
@@ -66,6 +66,8 @@ Crafty.c "ShipIcon", {
     @body = Crafty.e("StatusBar")
     armor_factor  = ship.get_armor_factor()
     shield_factor = ship.get_shield_factor()
+    console.log("shields, shield_stat", ship.shields, ship.shield_stat)
+    console.log("display armor/shield factors", armor_factor, shield_factor)
     @body.statusBar(this, color: "#f00", factor: armor_factor, yOff: 32)
     @shield = Crafty.e("StatusBar")
     @shield.statusBar(this, color: "#00f", factor: shield_factor, yOff: 34 )

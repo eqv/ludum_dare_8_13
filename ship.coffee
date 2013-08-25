@@ -6,6 +6,7 @@ Crafty.c "Damagable", {
   take_dmg: (bullet) ->
     this.trigger("DamageTaken")
     @was_damaged = true
+    console.log("dmg taken", @shield_stat, @armor_stat)
     if @shield_stat > 0
       @shield_stat -= bullet.shield_dmg
     else
@@ -22,8 +23,11 @@ Crafty.c "Damagable", {
     @was_damaged = false
 
   get_shield_factor: () ->
+    return 0 if @shield_stat < 0
     return @shield_stat / @shields
+
   get_armor_factor: () ->
+    return 0 if @armor_stat < 0
     return @armor_stat / @armor
 
   is_alive: () ->

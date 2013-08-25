@@ -1,20 +1,3 @@
-Crafty.c "TestShip",  {
-  init: ->
-    @filename = "assets/testship"
-    @speed = 1
-    @maneuverability = 1
-    @armor = 1
-    @shields = 1
-    #you should put this at the end, otherwise initialization of the other
-    #components that depend on th ships characteristics fail
-    this.requires "Ship"
-    this.image("#{@filename}.png")
-    @w = 120
-    @h = 55
-    this.origin("center")
-    @weapons = [Crafty.e("StandardWeapon").attr(x: 50, y: 14, rotation: 45).weapon(this)]
-}
-
 
 Crafty.c "Fighter", {
   init: ->
@@ -23,6 +6,7 @@ Crafty.c "Fighter", {
     @maneuverability = 1
     @armor = 10
     @shields = 10
+    @shield_regen = 2
     #you should put this at the end, otherwise initialization of the other
     #components that depend on th ships characteristics fail
     this.requires "Ship"
@@ -42,6 +26,7 @@ Crafty.c "Cruiser", {
     @maneuverability = 1
     @armor = 20
     @shields = 20
+    @shield_regen = 5
     #you should put this at the end, otherwise initialization of the other
     #components that depend on th ships characteristics fail
     this.requires "Ship"

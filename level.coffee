@@ -76,6 +76,8 @@ class Level
 
   planning_phase: () ->
     @state = "planning"
+    for obj_id in Crafty("Damagable")
+      Crafty(obj_id).regen_shields()
     return if this.check_win_conditions()
     for ship in Crafty("Ship")
       ship = Crafty(ship)
