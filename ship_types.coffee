@@ -1,7 +1,5 @@
-
 Crafty.c "TestShip",  {
   init: ->
-
     @filename = "assets/testship"
     @speed = 1
     @maneuverability = 1
@@ -14,5 +12,5 @@ Crafty.c "TestShip",  {
     @w = 120
     @h = 55
     this.origin("center")
-    @weapons = [Crafty.e("Weapon").attr(x: 50, y: 14, rotation: 45).weapon(120, 2000, this)]
+    @weapons = [Crafty.e("StandardWeapon").attr(x: 50, y: 14, rotation: 45).weapon(this)]
 }

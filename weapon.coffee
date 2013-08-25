@@ -3,20 +3,21 @@ Crafty.c "Weapon", {
     this.requires "2D, Collision"
     @arc = 90
     @reload_time = 1
-    @charge = 1
+    @charge = @reload_time
     @speed = 5
-    @dmg = 1
+    @shield_dmg = 10
+    @armor_dmg = 10
     @duration = 5000
     @range = 300
+    @color_head = "rgba(255, 255, 255, 1)"
+    @color_tail = "rgba(255, 255, 255, 0)"
+    @width = 1
     @ship = null
     @box = null
     @last_frame = Date.now()
     this.bind "EnterFrame", this.on_frame.bind this
 
-  weapon: (arc, reload_time, ship) ->
-    @arc = arc
-    @reload_time = reload_time
-    @charge = @reload_time
+  weapon: (ship) ->
     @ship = ship
     @ship.attach this
     @box = this.build_poly()
@@ -28,6 +29,11 @@ Crafty.c "Weapon", {
     pos3 = (new Vec2 Math.cos(Crafty.math.degToRad  @arc/2), Math.sin(Crafty.math.degToRad  @arc/2)).scale(@range).add(pos1)
     new Crafty.polygon pos1.asArray(), pos2.asArray(), pos3.asArray()
 
+  build_bullet: (vx, vy) ->
+    Crafty.e("Bullet").attr({ x: @x, y: @y, vx: vx, vy: vy,
+                              width: @width, color_tail: @color_tail, color_head: @color_head,
+                              duration: @duration, armor_dmg: @armor_dmg, shield_dmg: @shield_dmg}).bullet(@ship.team)
+
   on_frame: () ->
     if currentLevel? and currentLevel.state == "animating"
       now = Date.now()
@@ -35,11 +41,10 @@ Crafty.c "Weapon", {
       @last_frame = now
       if @charge >= @reload_time
         for ship in currentLevel.ships
-          if ship.team == @ship.team
+          if ship.team == @ship.team or not ship.is_alive()
             continue
           if @box.containsPoint ship.x, ship.y
             @charge = 0
             dir = new Vec2(ship.x, ship.y).subtract(new Vec2 @x, @y).scaleToMagnitude(@speed)
-            Crafty.e("Bullet").attr(x: @x, y: @y, vx: dir.x, vy: dir.y).bullet(@duration, @dmg, @ship.team)
-
- } 
+            this.build_bullet(dir.x, dir.y)
+} 

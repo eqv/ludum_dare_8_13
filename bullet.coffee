@@ -3,8 +3,17 @@ bullet_last_update = 0
 Crafty.c "Bullet", {
   init: () ->
     this.requires "2D, Collision"
+    @width = 1
+    @color_head = "rgba(255, 255, 255, 1)"
+    @color_tail = "rgba(255, 255, 255, 0)"
+    @armor_dmg = 1
+    @shield_dmg = 1
+    @duration = 1000
+
     @now = @start_time = Date.now()
     @animating = true
+    @my_team = null
+
     @c = $("#bullet_canvas")[0]
     if not @c?
       @c = document.createElement "canvas"
@@ -18,13 +27,11 @@ Crafty.c "Bullet", {
     @ctx = @c.getContext "2d"
     this.bind "EnterFrame", this.on_frame.bind this
     this.collision new Crafty.polygon [0, 0]
-    this.onHit "Ship", this.on_hit.bind this
+    this.onHit "Damagable", this.on_hit.bind this
 
-  bullet: (duration, dmg, my_team) ->
-    @duration = duration
-    @dmg = dmg
-    @my_team = my_team
+  bullet: (my_team) ->
     @start_pos = new Vec2 @x, @y
+    @my_team = my_team
 
   stop: () ->
     if @animating
@@ -60,10 +67,12 @@ Crafty.c "Bullet", {
       trail_mid = Math.max 0, 1 - 15/len
       @ctx.beginPath()
       lingrad = @ctx.createLinearGradient @start_pos.x, @start_pos.y, @x, @y
-      lingrad.addColorStop 0, "rgba(255, 255, 255, 0)"
-      lingrad.addColorStop trail_mid, "#FFFFFF"
-      lingrad.addColorStop 1, "#FFFFFF"
+      lingrad.addColorStop 0, @color_tail
+      lingrad.addColorStop trail_mid, @color_head
+      lingrad.addColorStop 1, @color_head
       @ctx.strokeStyle = lingrad
+      @ctx.lineCap = "round"
+      @ctx.lineWidth = @width
       @ctx.moveTo(@start_pos.x, @start_pos.y)
       @ctx.lineTo(@x, @y)
       @ctx.stroke()
@@ -73,6 +82,7 @@ Crafty.c "Bullet", {
   on_hit: (e) ->
     for s in e
       if s.obj.team != @my_team
+        console.log "HIT"
         @duration = 0
-        s.obj.destroy()
+        s.obj.take_dmg(this)
 }
