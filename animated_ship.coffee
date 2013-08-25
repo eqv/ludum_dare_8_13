@@ -53,4 +53,6 @@ Crafty.c "AnimatedShip", {
       @rotation = current_frame.end_rot
       this.set_pos current_frame.end_pos
       this.removeComponent "AnimatedShip"
+      this.unbind "EnterFrame", this.on_frame
+      currentLevel.ship_finished_animating()
 }

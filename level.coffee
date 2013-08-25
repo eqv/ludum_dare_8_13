@@ -76,6 +76,13 @@ class Level
     for ship_id in Crafty("Ship")
       ship = Crafty(ship_id)
       ship.addComponent("AnimatedShip")
+    
+  ship_finished_animating: () ->
+    count_unfinished_ships = 0
+    for ship in Crafty("Ship")
+      ship = Crafty(ship)
+      count_unfinished_ships += 1 if ship.has("AnimatedShip")
+    this.planning_phase() if count_unfinished_ships == 0
 
   check_win_conditions: () ->
     alive_teams = 0
