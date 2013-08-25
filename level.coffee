@@ -67,7 +67,6 @@ class Level
       ship = Crafty(ship)
       ship.removeComponent("AnimatedShip")
     @current_team = 0
-    console.log " I be planning"
     this.next_planning_turn()
 
   animation_phase: () ->
