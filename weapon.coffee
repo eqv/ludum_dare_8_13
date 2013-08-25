@@ -43,8 +43,9 @@ Crafty.c "Weapon", {
         for ship in currentLevel.ships
           if ship.team == @ship.team or not ship.is_alive()
             continue
-          if @box.containsPoint ship.x, ship.y
+          sp = ship.get_pos()
+          if @box.containsPoint sp.x, sp.y
             @charge = 0
-            dir = new Vec2(ship.x, ship.y).subtract(new Vec2 @x, @y).scaleToMagnitude(@speed)
+            dir = sp.subtract(new Vec2 @x, @y).scaleToMagnitude(@speed)
             this.build_bullet(dir.x, dir.y)
 } 
