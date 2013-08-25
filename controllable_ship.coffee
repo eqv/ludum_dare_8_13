@@ -14,10 +14,12 @@ Crafty.c "ControllableShip", {
 
 Crafty.c "Controller", {
   init: ->
-    this.requires "2D, DOM, Image, RestrictedDraggable, Color"
-    #this.image "assets/move_target.png"
+    this.requires "2D, DOM, Image, RestrictedDraggable, Centered"
+    this.image "assets/move_target.png"
+    @w = 32
+    @h = 32
+    this.origin("center")
     #this.bind "Dragging", this.drag
-    this.color( "#00ff00")
 
   controller: (ship) ->
     @ship = ship
@@ -25,8 +27,6 @@ Crafty.c "Controller", {
     this.set_path(end_pos: pos, center: null, radius: null, end_time: 1)
     this.x= pos.x
     this.y= pos.y
-    this.w  = 5
-    this.h  = 5
     this.enableDrag()
     this.bind "DragStart",->Crafty.viewport.lookmouse(false)
     this.bind "DragEnd",->Crafty.viewport.lookmouse(true)
@@ -48,6 +48,15 @@ Crafty.c "Controller", {
   set_path: (path) ->
     @path = path
     @ship.keyframes = [path] if path
+    @rotation = this.get_final_rotation(path)
+
+  get_final_rotation: (path) ->
+    if path.center
+      target_dir = path.end_pos.clone().subtract(path.center)
+      self_dir = @ship.get_pos().clone().subtract(path.center)
+      return @ship.rotation - radToDeg(target_dir.angleBetween(self_dir))
+    else
+      return radToDeg(@ship.get_pos().angleTo(path.end_pos))
 
   is_valid_drag_position: (x,y) ->
     this.activate()

@@ -7,6 +7,6 @@ load_level = (lvl) ->
   Crafty.scene("level_" + lvl)
 
 Crafty.scene "menu", () ->
-  Crafty.background "#999"
+  Crafty.background "#444"
   Crafty.viewport.mouselook(false)
   buildButton "Level " + i, i - 1, load_level.bind(null, i) for i in [1..5]

@@ -16,7 +16,6 @@ Crafty.c "HumanPlayer", {
       e.shipIcon(ship)
 
   cleanup_planning: () ->
-    console.log "destorying shity gui shit"
     for id in Crafty("ShipIcon, NextTurnButton")
       Crafty(id).remove()
 }

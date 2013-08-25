@@ -30,7 +30,7 @@ Crafty.c "Damagable", {
 
 Crafty.c "Ship", {
   init: ->
-    this.requires "2D,DOM, Image, Damagable"
+    this.requires "2D,DOM, Image, Damagable, Centered"
 
   revoke_controll: () ->
     if @controller
@@ -43,18 +43,6 @@ Crafty.c "Ship", {
 
   get_dir: ()->
     return (new Vec2(1,0)).rotate(degToRad(@_rotation))
-
-  get_pos: ()->
-    return new Vec2(@x+@w/2,@y+@h/2)
-
-  set_pos: (x, y) ->
-    if not y?
-      @x = x.x - @w/2
-      @y = x.y - @h/2
-    else
-      @x = x - @w/2
-      @y = y - @h/2
-    return this
 
   get_path_to: (target) ->
     steering = this.get_steering_circle(target)
