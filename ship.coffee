@@ -119,7 +119,6 @@ Crafty.c "Ship", {
     else
       return this.get_pos().subtract(target).magnitude()
 
-
   get_steering_circle: (target)->
     pos = this.get_pos()
     dir = this.get_dir()
@@ -151,7 +150,6 @@ Crafty.c "Ship", {
     x = line1_start.x + (a * (line1_end.x - line1_start.x));
     y = line1_start.y + (a * (line1_end.y - line1_start.y));
     return new Vec2(x,y)
-  }
 
-
+}
 

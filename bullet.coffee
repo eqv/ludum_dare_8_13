@@ -5,8 +5,8 @@ Crafty.c "Bullet", {
     this.requires "2D, Collision"
     @now = @start_time = Date.now()
     @animating = true
-    @c = $ "bullet_canvas"
-    if not c?
+    @c = $("#bullet_canvas")[0]
+    if not @c?
       @c = document.createElement "canvas"
       @c.id = "bullet_canvas"
       @c.width = Crafty.viewport.width
