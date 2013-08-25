@@ -11,6 +11,7 @@ Crafty.c "ControllableShip", {
     @controller.activate()
   }
 
+
 Crafty.c "Controller", {
   init: ->
     this.requires "2D, DOM, Image, RestrictedDraggable, Color"

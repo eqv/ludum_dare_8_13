@@ -2,7 +2,6 @@ Crafty.c "Team", {
   init: () ->
     @fleet = []
   planning_turn: () ->
-    alert("#{@name}s Turn")
     this.perform_planning()
 }
 

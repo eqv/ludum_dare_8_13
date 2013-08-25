@@ -33,7 +33,6 @@ Crafty.c "Damagable", {
 Crafty.c "Ship", {
   init: ->
     this.requires "2D,DOM, Image, Damagable"
-    this.bind "Change", () -> this.origin("center");
 
   revoke_controll: () ->
     if @controller
