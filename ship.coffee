@@ -21,7 +21,7 @@ Crafty.c "Damagable", {
 
   get_shield_factor: () ->
     return @shield_stat / @shield
-  get_body_factor:  () ->
+  get_armor_factor: () ->
     return @armor_stat / @armor
 
   is_alive: () ->
