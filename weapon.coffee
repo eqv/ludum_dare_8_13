@@ -25,8 +25,10 @@ Crafty.c "Weapon", {
 
   build_poly: () ->
     pos1 = new Vec2 @x, @y
-    pos2 = (new Vec2 Math.cos(Crafty.math.degToRad -@arc/2), Math.sin(Crafty.math.degToRad -@arc/2)).scale(@range).add(pos1)
-    pos3 = (new Vec2 Math.cos(Crafty.math.degToRad  @arc/2), Math.sin(Crafty.math.degToRad  @arc/2)).scale(@range).add(pos1)
+    pos2 = (new Vec2 Math.cos(Crafty.math.degToRad(-@arc/2 + @rotation)),
+                     Math.sin(Crafty.math.degToRad(-@arc/2 + @rotation))).scale(@range).add(pos1)
+    pos3 = (new Vec2 Math.cos(Crafty.math.degToRad( @arc/2 + @rotation)),
+                     Math.sin(Crafty.math.degToRad( @arc/2 + @rotation))).scale(@range).add(pos1)
     new Crafty.polygon pos1.asArray(), pos2.asArray(), pos3.asArray()
 
   build_bullet: (vx, vy) ->

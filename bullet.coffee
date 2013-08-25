@@ -82,7 +82,6 @@ Crafty.c "Bullet", {
   on_hit: (e) ->
     for s in e
       if s.obj.team != @my_team
-        console.log "HIT"
         @duration = 0
         s.obj.take_dmg(this)
 }
