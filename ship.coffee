@@ -6,21 +6,23 @@ Crafty.c "Damagable", {
   take_dmg: (bullet) ->
     this.trigger("DamageTaken")
     @was_damaged = true
-    if @shield > 0
+    if @shield_stat > 0
       @shield_stat -= bullet.shield_dmg
     else
       @armor_stat -= bullet.armor_dmg
 
   regen_shields: () ->
+    return false if @armor_stat <= 0
     if @shield_stat > 0 && @shield_stat < @shields
-      @shield_stat += Math.min(@shilds - @shield_stat, @shield_regen)
+      @shield_stat +=  @shield_regen
+      @shield_stat = @shields if @shield_Stat > @shields
     else
       if !@was_damaged
-        @shield_stat = @shield_capacity
+        @shield_stat = @shield_regen
     @was_damaged = false
 
   get_shield_factor: () ->
-    return @shield_stat / @shield
+    return @shield_stat / @shields
   get_armor_factor: () ->
     return @armor_stat / @armor
 

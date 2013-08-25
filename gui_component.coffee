@@ -64,9 +64,11 @@ Crafty.c "ShipIcon", {
     this.startGui()
     this.set_icon(this, ship)
     @body = Crafty.e("StatusBar")
-    @body.statusBar(this, color: "#f00", factor: ship.get_armor_factor(), yOff: 32)
+    armor_factor  = ship.get_armor_factor()
+    shield_factor = ship.get_shield_factor()
+    @body.statusBar(this, color: "#f00", factor: armor_factor, yOff: 32)
     @shield = Crafty.e("StatusBar")
-    @shield.statusBar(this, color: "#00f", factor: ship.get_shield_factor(), yOff: 34 )
+    @shield.statusBar(this, color: "#00f", factor: shield_factor, yOff: 34 )
     that = this
     @set_icon_callback = () ->
       that.set_icon(that,ship)

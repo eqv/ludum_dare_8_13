@@ -60,8 +60,9 @@ Crafty.c "BattleShip", {
     @filename = "assets/battleship"
     @speed = 1
     @maneuverability = 1
-    @armor = 1
-    @shields = 1
+    @armor = 5
+    @shields = 5
+    @shield_regen = 1
     #you should put this at the end, otherwise initialization of the other
     #components that depend on th ships characteristics fail
     this.requires "Ship"
