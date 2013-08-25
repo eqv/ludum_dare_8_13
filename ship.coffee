@@ -1,16 +1,15 @@
 Crafty.c "Damagable", {
-
   init: () ->
-    @body_stat = @armor
+    @armor_stat = @armor
     @shield_stat = @shields
 
-  take_dmg: (weapon) ->
+  take_dmg: (bullet) ->
     this.trigger("DamageTaken")
     @was_damaged = true
     if @shield > 0
-      @shield_stat -= weapon.shield_dmg(this)
+      @shield_stat -= bullet.shield_dmg
     else
-      @body -= weapon.body_dmg(this)
+      @armor_stat -= bullet.armor_dmg
 
   regen_shields: () ->
     if @shield_stat > 0 && @shield_stat < @shields
@@ -23,11 +22,10 @@ Crafty.c "Damagable", {
   get_shield_factor: () ->
     return @shield_stat / @shield
   get_body_factor:  () ->
-    return @body_stat / @armor
-
+    return @armor_stat / @armor
 
   is_alive: () ->
-    return @body_stat > 0
+    return @armor_stat > 0
 }
 
 Crafty.c "Ship", {

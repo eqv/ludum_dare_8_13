@@ -81,8 +81,8 @@ Crafty.c "ShipIcon", {
     this.destroy()
 
   set_icon: (icon, ship)->
-    if ship.body_stat > 0
-      if ship.controller.selected
+    if ship.armor_stat > 0
+      if ship.controller? and ship.controller.selected
         icon.image("#{ship.filename}_icon_selected.png")
       else
         icon.image("#{ship.filename}_icon.png")
