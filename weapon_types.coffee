@@ -33,7 +33,7 @@ Crafty.c "FighterWeapon", {
 Crafty.c "CruiserWeapon", {
   init: ->
     this.requires "Weapon"
-    @arc = 40
+    @arc = 60
     @reload_time = 2000
     @charge = @reload_time
     @speed = 7
@@ -50,14 +50,14 @@ Crafty.c "BattleShipWeapon", {
   init: ->
     this.requires "Weapon"
     @arc = 60
-    @reload_time = 2000
+    @reload_time = 4000
     @charge = @reload_time
-    @speed = 10
+    @speed = 5
     @shield_dmg = 10
     @armor_dmg = 10
-    @duration = 2500
-    @range = 500
+    @duration = 3000
+    @range = 600
     @color_head = "rgba(  0,   0, 255, 1)"
     @color_tail = "rgba(255, 255, 255, 0)"
-    @width = 2
+    @width = 3
 }

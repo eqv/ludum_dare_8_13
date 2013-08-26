@@ -2,61 +2,24 @@ levels = []
 currentLevel = null
 
 levels[1] =
-  name: "Devel",
+  name: "Training",
   deco: [
-    {
-      path: "assets/iris.png"
-      x: -100
-      y: -100
-      alpha: 1
-      depth: 0.9
-    },
-    {
-      path: "assets/planet.png"
-      x: 100
-      y: 100
-      alpha: 1
-      depth: 0.5
-    }
+    { path: "assets/iris.png", x: -100, y: -100, alpha: 1, depth: 0.99 }
+    { path: "assets/planet.png", x: 100, y: 100, alpha: 1, depth: 0.5 }
   ],
   ships: [
-    {
-      type: "BattleShip"
-      x: 320
-      y: 240
-      rot: 20
-      team: "Team 2"
-    },
-    {
-      type: "Cruiser"
-      x: 150
-      y: 100
-      rot: 90
-      team: "Team 1"
-    },
-    {
-      type: "Fighter"
-      x: 100
-      y: 120
-      rot: 30
-      team: "Team 1"
-    }
+    { type: "Cruiser", x: 300, y: 350, rot:   0, team: "Team 1"},
+    { type: "Fighter", x: 700, y: 350, rot: 180, team: "Team 2"},
   ],
   teams: [
-    {
-      name: "Team 1"
-      type: "HumanPlayer"
-    },
-    {
-      name: "Team 2"
-      type: "HumanPlayer"
-    }
+    { name: "Team 1", type: "HumanPlayer" },
+    { name: "Team 2", type: "SittingDuckAI" }
   ]
 
 levels[2] =
   name: "Fun with Fighters",
   deco: [
-    { path: "assets/iris.png", x: -100, y: -100, alpha: 1, depth: 0.9 }
+    { path: "assets/iris.png", x: -100, y: -100, alpha: 1, depth: 0.99 }
   ],
   ships: [
     { type: "Fighter", x: 250, y: 100, rot:   0, team: "Team 1"},
@@ -76,16 +39,18 @@ levels[2] =
 levels[3] =
   name: "The Ambush"
   deco: [
-    { path: "assets/iris.png", x: -100, y: -100, alpha: 1, depth: 0.9 }
+    { path: "assets/iris.png", x: -100, y: -100, alpha: 1, depth: 0.99 }
   ],
   ships: [
-    { type: "Fighter", x:  70, y: 100, rot:  90, team: "Team 1"},
-    { type: "Fighter", x: 120, y: 100, rot:  90, team: "Team 1"},
-    { type: "Fighter", x: 170, y: 100, rot:  90, team: "Team 1"},
-    { type: "Fighter", x: 220, y: 100, rot:  90, team: "Team 1"},
-    { type: "Fighter", x: 270, y: 100, rot:  90, team: "Team 1"},
-    { type: "Cruiser", x: 600, y: 500, rot: 180, team: "Team 2"},
-    { type: "Cruiser", x: 700, y: 500, rot: 180, team: "Team 2"},
+    { type: "Fighter", x: 650, y: 100, rot: 150, team: "Team 1"},
+    { type: "Fighter", x: 675, y: 150, rot: 150, team: "Team 1"},
+    { type: "Fighter", x: 700, y: 200, rot: 150, team: "Team 1"},
+    { type: "Fighter", x: 700, y: 350, rot: 180, team: "Team 1"},
+    { type: "Fighter", x: 700, y: 500, rot: 210, team: "Team 1"},
+    { type: "Fighter", x: 675, y: 550, rot: 210, team: "Team 1"},
+    { type: "Fighter", x: 650, y: 600, rot: 210, team: "Team 1"},
+    { type: "Cruiser", x: 300, y: 350, rot: 180, team: "Team 2"},
+    { type: "Cruiser", x: 300, y: 400, rot: 180, team: "Team 2"},
   ],
   teams: [
     { name: "Team 1", type: "HumanPlayer" },
@@ -97,6 +62,7 @@ class Level
     @ships = []
     @teams = []
     @teams_by_name = {}
+    Crafty.background("#000000")
     for bckg_info,i in lvl.deco
       Crafty.e("BackgroundObject").backgroundObject( bckg_info)
     for team_desc,i in lvl.teams
@@ -152,9 +118,9 @@ class Level
     for team in @teams
       if this.get_living_ships_of(team).length > 0
         alive_teams += 1
+        window.winner = team
     if alive_teams <= 1
       console.log "We have a Winner, going to game_ended scene"
-      window.winner = team
       Crafty.scene("menu")
       return true
     return false
@@ -167,4 +133,4 @@ startScene = (i) ->
   Crafty.viewport.mouselook(true)
   currentLevel.planning_phase()
 
-Crafty.scene("level_" + i, startScene.bind(null, i)) for i in [1..5]
+Crafty.scene("level_" + i, startScene.bind(null, i)) for i in [1..levels.length-1]
