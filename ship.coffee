@@ -8,8 +8,11 @@ Crafty.c "Damagable", {
     @was_damaged = true
     if @shield_stat > 0
       @shield_stat -= bullet.shield_dmg
+      @shieldvis.hit() if @shieldvis
     else
       @armor_stat -= bullet.armor_dmg
+      Crafty.e("2D, DOM, SpriteAnimation, Explosion").attr(x: bullet.x - 20, y: bullet.y - 20)
+            .animate("explode", 0, 0, 10).animate("explode", 5, 0)
 
   regen_shields: () ->
     return false if @armor_stat <= 0
@@ -33,9 +36,31 @@ Crafty.c "Damagable", {
     return @armor_stat > 0
 }
 
+Crafty.c "ShieldVis", {
+  init: ->
+    this.requires '2D, Canvas, Image,Centered, Tween'
+
+  shieldVis:(ship) ->
+    @ship = ship
+    this.image("#{@ship.filename}_shield.png")
+    @x = -7
+    @y = -7
+    this.alpha = 0.0
+    @ship.attach(this)
+
+  hit: () ->
+    this.alpha = 0.6
+    this.tween(alpha: 0, 40)
+
+}
+
 Crafty.c "Ship", {
   init: ->
     this.requires "2D,Canvas, Image, Damagable, Centered"
+
+  ship: ->
+    @shieldvis = Crafty.e("ShieldVis")
+    @shieldvis.shieldVis(this)
 
   get_dir: ()->
     return (new Vec2(1,0)).rotate(degToRad(@_rotation))

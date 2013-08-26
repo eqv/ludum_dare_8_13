@@ -85,8 +85,6 @@ Crafty.c "Bullet", {
       if s.obj.team != @my_team
         @duration = 0
         s.obj.take_dmg(this)
-        Crafty.e("2D, DOM, SpriteAnimation, Explosion").attr(x: @x - 20, y: @y - 20)
-              .animate("explode", 0, 0, 10).animate("explode", 5, 0)
         this.unbind("Hit",this.on_hit)
-    
+
 }

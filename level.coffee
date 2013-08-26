@@ -66,6 +66,7 @@ class Level
         @teams_by_name[team_desc.name] = team
     for ship_desc,i in lvl.ships
       ship = Crafty.e(ship_desc.type)
+      ship.ship()
       ship.attr(rotation: ship_desc.rot)
       ship.set_pos(ship_desc.x, ship_desc.y)
       ship.team = ship_desc.team
