@@ -32,11 +32,30 @@ Crafty.c "SittingDuckAI", {
 
 }
 
+Crafty.c "FadingImage", {
+  init: () ->
+    this.requires "2D, Image, Canvas, Tween, Delay"
+
+  fadingImage: (path) ->
+    @x = 500
+    @y = 100
+    this.image(path)
+    @alpha = 1
+    this.tween(alpha:0, 200)
+    this.delay(this.destroy, 4000, 0)
+}
+
 Crafty.c "HumanPlayer", {
   init: () ->
     this.requires "Team"
 
   perform_planning: () ->
+    if this.name == "Team 1"
+      Crafty.e("FadingImage").fadingImage("assets/player1.png")
+    else if this.name == "Team 2"
+      Crafty.e("FadingImage").fadingImage("assets/player2.png")
+    else
+      console.log "unknown team", this.name
     for ship in @fleet
       ship.addComponent("ControllableShip")
       Crafty.e("StateVis").stateVis(ship)
