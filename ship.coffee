@@ -13,6 +13,8 @@ Crafty.c "Damagable", {
       @armor_stat -= bullet.armor_dmg
       Crafty.e("2D, DOM, SpriteAnimation, Explosion").attr(x: bullet.x - 20, y: bullet.y - 20)
             .animate("explode", 0, 0, 10).animate("explode", 5, 0)
+      if @armor_stat <= 0
+        this.removeComponent("Damagable")
 
   regen_shields: () ->
     return false if @armor_stat <= 0
