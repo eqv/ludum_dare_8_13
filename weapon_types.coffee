@@ -23,7 +23,7 @@ Crafty.c "FighterWeapon", {
     @speed = 10
     @shield_dmg = 2
     @armor_dmg = 2
-    @duration = 5000
+    @duration = 2500
     @range = 300
     @color_head = "rgba(255,   0,   0, 1)"
     @color_tail = "rgba(255, 255, 255, 0)"
@@ -39,7 +39,7 @@ Crafty.c "CruiserWeapon", {
     @speed = 7
     @shield_dmg = 5
     @armor_dmg = 5
-    @duration = 5000
+    @duration = 2500
     @range = 400
     @color_head = "rgba(  0, 255,   0, 1)"
     @color_tail = "rgba(255, 255, 255, 0)"
@@ -52,10 +52,10 @@ Crafty.c "BattleShipWeapon", {
     @arc = 60
     @reload_time = 2000
     @charge = @reload_time
-    @speed = 5
+    @speed = 10
     @shield_dmg = 10
     @armor_dmg = 10
-    @duration = 5000
+    @duration = 2500
     @range = 500
     @color_head = "rgba(  0,   0, 255, 1)"
     @color_tail = "rgba(255, 255, 255, 0)"

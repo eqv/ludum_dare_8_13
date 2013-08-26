@@ -55,27 +55,18 @@ class Level
       @teams_by_name[ship_desc.team].fleet.push(ship)
       @ships[i] = ship
 
-  revoke_controlls: ->
-    for ship_id in Crafty("Ship")
-      Crafty(ship_id).revoke_controll()
-
-  planning_turn: (team) ->
-    for ship_id in Crafty("Ship")
-      ship = Crafty(ship_id)
-      if ship.team == team.name
-        ship.grant_controll()
-    team.planning_turn()
-
   next_planning_turn: () ->
-    this.revoke_controlls()
     if @current_team >= @teams.length
       this.animation_phase()
     else
-      this.planning_turn(@teams[@current_team])
+      @teams[@current_team].planning_turn()
       @current_team+=1
 
   planning_phase: () ->
+    this.check_win_conditions()
     @state = "planning"
+    for obj_id in Crafty("Damagable")
+      Crafty(obj_id).regen_shields()
     return if this.check_win_conditions()
     for ship in Crafty("Ship")
       ship = Crafty(ship)
@@ -99,15 +90,16 @@ class Level
   check_win_conditions: () ->
     alive_teams = 0
     for team in @teams
-      if this.get_ships_of(team).length > 0
+      if this.get_living_ships_of(team).length > 0
         alive_teams += 1
-    if alive_teams < 0
+    if alive_teams <= 1
+      console.log "We have a Winner, going to game_ended scene"
       Crafty.scene("game_ended")
       return true
     return false
 
-  get_ships_of: (team) ->
-    return (ship for ship in @ships when ship.team == team.name)
+  get_living_ships_of: (team) ->
+    return (ship for ship in team.fleet when ship.is_alive())
 
 startScene = (i) ->
   currentLevel = new Level levels[i]

@@ -22,8 +22,11 @@ Crafty.c "Damagable", {
     @was_damaged = false
 
   get_shield_factor: () ->
+    return 0 if @shield_stat < 0
     return @shield_stat / @shields
+
   get_armor_factor: () ->
+    return 0 if @armor_stat < 0
     return @armor_stat / @armor
 
   is_alive: () ->
@@ -33,15 +36,6 @@ Crafty.c "Damagable", {
 Crafty.c "Ship", {
   init: ->
     this.requires "2D,DOM, Image, Damagable, Centered"
-
-  revoke_controll: () ->
-    if @controller
-      @controller.destroy()
-      @controller = null
-    this.removeComponent("ControllableShip")
-
-  grant_controll: () ->
-    this.addComponent("ControllableShip")
 
   get_dir: ()->
     return (new Vec2(1,0)).rotate(degToRad(@_rotation))
@@ -67,35 +61,35 @@ Crafty.c "Ship", {
     radius = res.radius
     dist = this.get_movement_length(target, center, radius)
     if !center
-      if dist > this.max_move_dist()
-        new_target = this.get_pos().subtract(target).normalize().scale(this.max_move_dist())
+      if dist > this.get_max_move_dist()
+        new_target = this.get_pos().subtract(target).normalize().scale(this.get_max_move_dist())
         new_target.add this.get_pos()
         target.x = new_target.x
         target.y = new_target.y
-      if dist < this.min_move_dist()
-        new_target = this.get_pos().subtract(target).normalize().scale(this.min_move_dist())
+      if dist < this.get_min_move_dist()
+        new_target = this.get_pos().subtract(target).normalize().scale(this.get_min_move_dist())
         new_target.add this.get_pos()
         target.x = new_target.x
         target.y = new_target.y
     else
-      if radius < this.min_turning_radius()
-        new_center = center.clone().subtract(this.get_pos()).normalize().scale(this.min_turning_radius())
+      if radius < this.get_min_turn_radius()
+        new_center = center.clone().subtract(this.get_pos()).normalize().scale(this.get_min_turn_radius())
         new_center.add this.get_pos()
         center.x = new_center.x
         center.y = new_center.y
         target_dir = target.clone().subtract(center)
-        target_dir.scaleToMagnitude(this.min_turning_radius())
+        target_dir.scaleToMagnitude(this.get_min_turn_radius())
 
         target.x = center.x + target_dir.x
         target.y = center.y + target_dir.y
-        radius = this.min_turning_radius()
+        radius = this.get_min_turn_radius()
         res.radius = radius
         dist = this.get_movement_length(target, center, radius)
 
-      if dist < this.min_move_dist()
+      if dist < this.get_min_move_dist()
         target_dir = target.clone().subtract(center)
         self_dir = this.get_pos().subtract(center)
-        min_rad = this.min_move_dist()/radius
+        min_rad = this.get_min_move_dist()/radius
         new_target_a = self_dir.clone().rotate(min_rad)
         new_target_b = self_dir.clone().rotate(-min_rad)
         if target_dir.distance(new_target_a) < target_dir.distance(new_target_b)
@@ -105,10 +99,10 @@ Crafty.c "Ship", {
           target.x = new_target_b.x + center.x
           target.y = new_target_b.y + center.y
 
-      if dist > this.max_move_dist()
+      if dist > this.get_max_move_dist()
         target_dir = target.clone().subtract(center)
         self_dir = this.get_pos().subtract(center)
-        max_rad = this.max_move_dist()/radius
+        max_rad = this.get_max_move_dist()/radius
         new_target_a = self_dir.clone().rotate(max_rad)
         new_target_b = self_dir.clone().rotate(-max_rad)
 
@@ -121,16 +115,16 @@ Crafty.c "Ship", {
 
   is_valid_target: (target, center, radius) ->
     dist = this.get_movement_length(target, center, radius)
-    return false if dist > this.max_move_dist() || dist < this.min_move_dist()
-    return false if center && radius < this.min_turning_radius()
+    return false if dist > this.get_max_move_dist() || dist < this.get_min_move_dist()
+    return false if center && radius < this.get_min_turn_radius()
     return true
 
-  min_turning_radius: ->
-    return 100
-  max_move_dist: ->
-    return 200
-  min_move_dist: ->
-    return 80
+  get_min_turn_radius: ->
+    return @min_turn_radius
+  get_max_move_dist: ->
+    return @max_speed
+  get_min_move_dist: ->
+    return @min_speed
 
   get_movement_length: (target, center, radius) ->
     if center

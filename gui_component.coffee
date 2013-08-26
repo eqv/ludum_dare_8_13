@@ -30,7 +30,8 @@ Crafty.c "NextTurnButton", {
   on_click: (e) ->
     count_unused_ships = 0
     for ship_id in Crafty("ControllableShip")
-      count_unused_ships += 1 if !Crafty(ship_id).controller.active
+      ship = Crafty(ship_id)
+      count_unused_ships += 1 if ship.is_alive() && !ship.controller.active
     ok = true
     if count_unused_ships > 0
       ok = confirm("you have unused ships, do you really want to continue?")
@@ -46,7 +47,7 @@ Crafty.c "StatusBar", {
     @xOff = icon.xOff + (attr.xOff || 0)
     @yOff = icon.yOff + (attr.yOff || 0)
     @h = attr.h || 2
-    @w = attr.factor*32 || 32
+    @w = attr.factor * 32
     this.color(attr.color || "#f00")
     this.startGui()
 }
