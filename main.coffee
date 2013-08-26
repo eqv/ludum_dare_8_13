@@ -15,7 +15,7 @@ $(document).ready ->
       "assets/fighter.png", "assets/battleship_icon_dead.png",
       "assets/cruiser_icon_selected.png", "assets/move_target.png",
       "assets/battleship_icon.png"]
-  Crafty.init 640, 480
+  Crafty.init 1080, 603
   Crafty.canvas.init()
   assets = get_list_of_assets()
   Crafty.load assets ,done_loading, process_loading, error_loading
