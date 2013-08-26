@@ -24,11 +24,11 @@ Crafty.c "Weapon", {
     this.collision @box
 
   build_poly: () ->
-    pos1 = new Vec2 @x, @y
+    pos1 = new Vec2 0, 0
     pos2 = (new Vec2 Math.cos(Crafty.math.degToRad(-@arc/2 + @rotation)),
-                     Math.sin(Crafty.math.degToRad(-@arc/2 + @rotation))).scale(@range).add(pos1)
+                     Math.sin(Crafty.math.degToRad(-@arc/2 + @rotation))).scale(@range)
     pos3 = (new Vec2 Math.cos(Crafty.math.degToRad( @arc/2 + @rotation)),
-                     Math.sin(Crafty.math.degToRad( @arc/2 + @rotation))).scale(@range).add(pos1)
+                     Math.sin(Crafty.math.degToRad( @arc/2 + @rotation))).scale(@range)
     new Crafty.polygon pos1.asArray(), pos2.asArray(), pos3.asArray()
 
   build_bullet: (vx, vy) ->
