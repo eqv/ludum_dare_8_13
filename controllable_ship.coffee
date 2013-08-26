@@ -56,9 +56,10 @@ Crafty.c "Controller", {
     @ship.trigger("DeselectedShip")
 
   set_path: (path) ->
-    @path = path
-    @ship.keyframes = [path] if path
-    @rotation = this.get_final_rotation(path)
+    if path
+      @path = path
+      @ship.keyframes = [path]
+      @rotation = this.get_final_rotation(path)
 
   get_final_rotation: (path) ->
     if path.center

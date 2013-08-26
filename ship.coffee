@@ -2,7 +2,6 @@ Crafty.c "Damagable", {
   init: () ->
     @armor_stat = @armor
     @shield_stat = @shields
-    console.log "init healt", @shield_stat, @armor_stat
 
   take_dmg: (bullet) ->
     this.trigger("DamageTaken")
@@ -11,7 +10,6 @@ Crafty.c "Damagable", {
       @shield_stat -= bullet.shield_dmg
     else
       @armor_stat -= bullet.armor_dmg
-    console.log "took damange", @shield_stat, @armor_stat
 
   regen_shields: () ->
     return false if @armor_stat <= 0
@@ -22,15 +20,12 @@ Crafty.c "Damagable", {
       if @shield_stat <= 0 and !@was_damaged
         @shield_stat = @shield_regen
     @was_damaged = false
-    console.log "regen shields", @shield_stat, @armor_stat
 
   get_shield_factor: () ->
-    console.log "shield factor", @shield_stat, @armor_stat
     return 0 if @shield_stat < 0
     return @shield_stat / @shields
 
   get_armor_factor: () ->
-    console.log "armor factor", @shield_stat, @armor_stat
     return 0 if @armor_stat < 0
     return @armor_stat / @armor
 
