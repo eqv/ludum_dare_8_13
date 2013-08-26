@@ -25,9 +25,9 @@ Crafty.c "Bullet", {
       @c.style.top = "0px"
       Crafty.stage.elem.appendChild @c
     @ctx = @c.getContext "2d"
-    this.bind "EnterFrame", this.on_frame.bind this
+    this.bind "EnterFrame", this.on_frame
     this.collision new Crafty.polygon [0, 0]
-    this.onHit "Damagable", this.on_hit.bind this
+    this.onHit "Damagable", this.on_hit
 
   bullet: (my_team) ->
     @start_pos = new Vec2 @x, @y
@@ -80,8 +80,11 @@ Crafty.c "Bullet", {
       this.destroy()
 
   on_hit: (e) ->
+    return if @duration <= 0
     for s in e
       if s.obj.team != @my_team
         @duration = 0
         s.obj.take_dmg(this)
+        this.unbind("Hit",this.on_hit)
+    
 }
