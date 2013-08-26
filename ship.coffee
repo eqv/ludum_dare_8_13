@@ -51,8 +51,8 @@ Crafty.c "ShieldVis", {
     @ship.attach(this)
 
   hit: () ->
-    this.alpha = 0.6
-    this.tween(alpha: 0, 40)
+    this.alpha = 1
+    this.tween(alpha: 0, 80)
 
 }
 
