@@ -35,7 +35,7 @@ Crafty.c "Damagable", {
 
 Crafty.c "Ship", {
   init: ->
-    this.requires "2D,DOM, Image, Damagable, Centered"
+    this.requires "2D,Canvas, Image, Damagable, Centered"
 
   get_dir: ()->
     return (new Vec2(1,0)).rotate(degToRad(@_rotation))

@@ -14,7 +14,7 @@ Crafty.c "ViewportStatic",{
 
 Crafty.c "NextTurnButton", {
   init: () ->
-    this.requires("2D, DOM, Image, Mouse, ViewportStatic")
+    this.requires("2D, Canvas, Image, Mouse, ViewportStatic")
     this.image("assets/next_turn.png")
     @xOff = 20
     @yOff = 20
@@ -42,7 +42,7 @@ Crafty.c "NextTurnButton", {
 
 Crafty.c "StatusBar", {
   init: () ->
-    this.requires("2D, DOM, ViewportStatic, Color")
+    this.requires("2D, Canvas, ViewportStatic, Color")
   statusBar: (icon,attr) ->
     @xOff = icon.xOff + (attr.xOff || 0)
     @yOff = icon.yOff + (attr.yOff || 0)
@@ -55,7 +55,7 @@ Crafty.c "StatusBar", {
 Crafty.c "ShipIcon", {
 
   init: () ->
-    this.requires("2D, DOM, Image, Mouse, ViewportStatic")
+    this.requires("2D, Canvas, Image, Mouse, ViewportStatic")
     this.bind "Click" , this.on_click
 
   shipIcon: (ship) ->
