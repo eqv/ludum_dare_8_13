@@ -5,9 +5,9 @@ Crafty.c "Fighter", {
     @max_speed = 200
     @min_speed = 20
     @min_turn_radius = 100
-    @armor = 5
-    @shields = 5
-    @shield_regen = 2
+    @armor = 6
+    @shields = 2
+    @shield_regen = 1
     #you should put this at the end, otherwise initialization of the other
     #components that depend on th ships characteristics fail
     this.requires "Ship"
