@@ -1,5 +1,13 @@
 bullet_last_update = 0
 
+clear_bullet_canvas = () ->
+  c = $("#bullet_canvas")[0]
+  if c?
+    ctx = c.getContext "2d"
+    ctx.setTransform 1, 0, 0, 1, 0, 0
+    ctx.clearRect 0, 0, c.width, c.height
+    ctx.setTransform 1, 0, 0, 1, Crafty.viewport.x, Crafty.viewport.y
+
 Crafty.c "Bullet", {
   init: () ->
     this.requires "2D, Collision"
@@ -47,9 +55,7 @@ Crafty.c "Bullet", {
   on_frame: (e) ->
     if bullet_last_update < e.frame
       bullet_last_update = e.frame
-      @ctx.setTransform 1, 0, 0, 1, 0, 0
-      @ctx.clearRect 0, 0, @c.width, @c.height
-      @ctx.setTransform 1, 0, 0, 1, Crafty.viewport.x, Crafty.viewport.y
+      clear_bullet_canvas()
 
     if currentLevel.state == "planning"
       this.stop()
