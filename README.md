@@ -11,3 +11,7 @@ A hosted version can be found [here](http://curufinwe.org/battlefleet/)
 
 Works best with two players, as we didn't have time for an AI.
 Have fun!
+
+Here is how it looks like:
+
+![Screenshot](screenshot.png)
