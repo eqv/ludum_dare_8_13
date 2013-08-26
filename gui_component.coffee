@@ -31,15 +31,8 @@ Crafty.c "NextTurnButton", {
 
   on_click: (e) ->
     count_unused_ships = 0
-    for ship_id in Crafty("ControllableShip")
-      ship = Crafty(ship_id)
-      count_unused_ships += 1 if ship.is_alive() && !ship.controller.active
-    ok = true
-    if count_unused_ships > 0
-      ok = confirm("you have unused ships, do you really want to continue?")
-    if ok
-      @team.cleanup_planning()
-      currentLevel.next_planning_turn()
+    @team.cleanup_planning()
+    currentLevel.next_planning_turn()
   }
 
 Crafty.c "StatusBar", {

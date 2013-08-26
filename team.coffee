@@ -21,6 +21,17 @@ Crafty.c "StateVis", {
 
 }
 
+Crafty.c "SittingDuckAI", {
+  init: () ->
+    this.requires "Team"
+
+  perform_planning: () ->
+    for ship in @fleet
+      ship.plan = {end_pos: ship.get_pos, center: null, radius: null, end_time: 3}
+    currentLevel.next_planning_turn()
+
+}
+
 Crafty.c "HumanPlayer", {
   init: () ->
     this.requires "Team"
