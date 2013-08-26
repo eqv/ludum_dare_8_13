@@ -4835,6 +4835,7 @@ Crafty.extend({
 				} else {
 					context.translate(0, change);
 				}
+				Crafty.trigger("ViewPortChanged");
 				Crafty.DrawManager.drawAll();
 			}
             style[axis == '_x' ? "left" : "top"] = v + "px";
