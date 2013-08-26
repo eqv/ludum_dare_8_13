@@ -15,7 +15,7 @@ Crafty.c "Damagable", {
     return false if @armor_stat <= 0
     if @shield_stat > 0 and @shield_stat < @shields
       @shield_stat +=  @shield_regen
-      @shield_stat = @shields if @shield_Stat > @shields
+      @shield_stat = @shields if @shield_stat > @shields
     else
       if @shield_stat <= 0 and !@was_damaged
         @shield_stat = @shield_regen
