@@ -18,7 +18,7 @@ Crafty.c("ViewportStatic", {
 
 Crafty.c("NextTurnButton", {
   init: function() {
-    this.requires("2D, DOM, Image, Mouse, ViewportStatic");
+    this.requires("2D, Canvas, Image, Mouse, ViewportStatic");
     this.image("assets/next_turn.png");
     this.xOff = 20;
     return this.yOff = 20;
@@ -53,7 +53,7 @@ Crafty.c("NextTurnButton", {
 
 Crafty.c("StatusBar", {
   init: function() {
-    return this.requires("2D, DOM, ViewportStatic, Color");
+    return this.requires("2D, Canvas, ViewportStatic, Color");
   },
   statusBar: function(icon, attr) {
     this.xOff = icon.xOff + (attr.xOff || 0);
@@ -67,7 +67,7 @@ Crafty.c("StatusBar", {
 
 Crafty.c("ShipIcon", {
   init: function() {
-    this.requires("2D, DOM, Image, Mouse, ViewportStatic");
+    this.requires("2D, Canvas, Image, Mouse, ViewportStatic");
     return this.bind("Click", this.on_click);
   },
   shipIcon: function(ship) {

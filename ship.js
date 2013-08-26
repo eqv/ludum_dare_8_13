@@ -40,7 +40,7 @@ Crafty.c("Damagable", {
 
 Crafty.c("Ship", {
   init: function() {
-    return this.requires("2D,DOM, Image, Damagable, Centered");
+    return this.requires("2D,Canvas, Image, Damagable, Centered");
   },
   get_dir: function() {
     return (new Vec2(1, 0)).rotate(degToRad(this._rotation));
