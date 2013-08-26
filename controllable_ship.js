@@ -78,9 +78,11 @@ Crafty.c("Controller", {
     return this.ship.trigger("DeselectedShip");
   },
   set_path: function(path) {
-    this.path = path;
-    if (path) this.ship.keyframes = [path];
-    return this.rotation = this.get_final_rotation(path);
+    if (path) {
+      this.path = path;
+      this.ship.keyframes = [path];
+      return this.rotation = this.get_final_rotation(path);
+    }
   },
   get_final_rotation: function(path) {
     var self_dir, target_dir;

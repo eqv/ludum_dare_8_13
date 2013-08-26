@@ -26,9 +26,9 @@ Crafty.c("Bullet", {
       Crafty.stage.elem.appendChild(this.c);
     }
     this.ctx = this.c.getContext("2d");
-    this.bind("EnterFrame", this.on_frame.bind(this));
+    this.bind("EnterFrame", this.on_frame);
     this.collision(new Crafty.polygon([0, 0]));
-    return this.onHit("Damagable", this.on_hit.bind(this));
+    return this.onHit("Damagable", this.on_hit);
   },
   bullet: function(my_team) {
     this.start_pos = new Vec2(this.x, this.y);
@@ -88,12 +88,14 @@ Crafty.c("Bullet", {
   },
   on_hit: function(e) {
     var s, _i, _len, _results;
+    if (this.duration <= 0) return;
     _results = [];
     for (_i = 0, _len = e.length; _i < _len; _i++) {
       s = e[_i];
       if (s.obj.team !== this.my_team) {
         this.duration = 0;
-        _results.push(s.obj.take_dmg(this));
+        s.obj.take_dmg(this);
+        _results.push(this.unbind("Hit", this.on_hit));
       } else {
         _results.push(void 0);
       }

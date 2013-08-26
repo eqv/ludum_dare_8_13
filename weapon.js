@@ -26,9 +26,9 @@ Crafty.c("Weapon", {
   },
   build_poly: function() {
     var pos1, pos2, pos3;
-    pos1 = new Vec2(this.x, this.y);
-    pos2 = (new Vec2(Math.cos(Crafty.math.degToRad(-this.arc / 2 + this.rotation)), Math.sin(Crafty.math.degToRad(-this.arc / 2 + this.rotation)))).scale(this.range).add(pos1);
-    pos3 = (new Vec2(Math.cos(Crafty.math.degToRad(this.arc / 2 + this.rotation)), Math.sin(Crafty.math.degToRad(this.arc / 2 + this.rotation)))).scale(this.range).add(pos1);
+    pos1 = new Vec2(0, 0);
+    pos2 = (new Vec2(Math.cos(Crafty.math.degToRad(-this.arc / 2 + this.rotation)), Math.sin(Crafty.math.degToRad(-this.arc / 2 + this.rotation)))).scale(this.range);
+    pos3 = (new Vec2(Math.cos(Crafty.math.degToRad(this.arc / 2 + this.rotation)), Math.sin(Crafty.math.degToRad(this.arc / 2 + this.rotation)))).scale(this.range);
     return new Crafty.polygon(pos1.asArray(), pos2.asArray(), pos3.asArray());
   },
   build_bullet: function(vx, vy) {

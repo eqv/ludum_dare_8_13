@@ -19,7 +19,9 @@ Crafty.c("Damagable", {
       this.shield_stat += this.shield_regen;
       if (this.shield_Stat > this.shields) this.shield_stat = this.shields;
     } else {
-      if (!this.was_damaged) this.shield_stat = this.shield_regen;
+      if (this.shield_stat <= 0 && !this.was_damaged) {
+        this.shield_stat = this.shield_regen;
+      }
     }
     return this.was_damaged = false;
   },
