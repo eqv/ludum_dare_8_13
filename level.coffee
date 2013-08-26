@@ -2,6 +2,7 @@ levels = []
 currentLevel = null
 
 levels[1] =
+  name: "Devel",
   deco: [
     { 
       path: "assets/iris.png"
@@ -39,6 +40,86 @@ levels[1] =
       y: 120
       rot: 30
       team: "eugen"
+    }
+  ],
+  teams: [
+    {
+      name: "eugen"
+      type: "HumanPlayer"
+    },
+    {
+      name: "coco"
+      type: "HumanPlayer"
+    }
+  ]
+
+levels[2] =
+  name: "Fun with Fighters",
+  deco: [
+    { 
+      path: "assets/iris.png"
+      x: -100
+      y: -100
+      alpha: 1
+      depth: 0.9
+    }
+  ],
+  ships: [
+    {
+      type: "Fighter"
+      x: 70
+      y: 100
+      rot: 0
+      team: "eugen"
+    },
+    {
+      type: "Fighter"
+      x: 70
+      y: 130
+      rot: 0
+      team: "eugen"
+    },
+    {
+      type: "Fighter"
+      x: 70
+      y: 160
+      rot: 0
+      team: "eugen"
+    },
+    {
+      type: "Fighter"
+      x: 70
+      y: 190
+      rot: 0
+      team: "eugen"
+    },
+    {
+      type: "Fighter"
+      x: 400
+      y: 110
+      rot: 180
+      team: "coco"
+    },
+    {
+      type: "Fighter"
+      x: 400
+      y: 140
+      rot: 180
+      team: "coco"
+    },
+    {
+      type: "Fighter"
+      x: 400
+      y: 170
+      rot: 180
+      team: "coco"
+    },
+    {
+      type: "Fighter"
+      x: 400
+      y: 200
+      rot: 180
+      team: "coco"
     }
   ],
   teams: [
