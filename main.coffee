@@ -1,5 +1,3 @@
-
-
 $(document).ready ->
   done_loading = () ->
     Crafty.scene("menu")
@@ -23,3 +21,4 @@ $(document).ready ->
   Crafty.load assets ,done_loading, process_loading, error_loading 
   Crafty.scene("menu")
   Crafty.viewport.clampToEntities = false
+  Crafty.sprite(40, 40, "assets/explosion.png", { Explosion: [0, 0] })
