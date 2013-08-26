@@ -4,12 +4,14 @@ Crafty.c "ViewportStatic",{
   yOff : 0
   startGui : () ->
     this.requires("2D");
-    this.bind "EnterFrame", ->
-      relative_x = -Crafty.viewport.x + @xOff;
-      relative_y = -Crafty.viewport.y + @yOff;
-      if @_x !=  relative_x or @_y != relative_y
-        @x = relative_x
-        @y = relative_y
+    Crafty.bind "ViewPortChanged", this.set_relative_position.bind(this)
+    this.set_relative_position()
+  set_relative_position: () ->
+    relative_x = -Crafty.viewport.x + @xOff;
+    relative_y = -Crafty.viewport.y + @yOff;
+    if @_x !=  relative_x or @_y != relative_y
+      @x = relative_x
+      @y = relative_y
   }
 
 Crafty.c "NextTurnButton", {

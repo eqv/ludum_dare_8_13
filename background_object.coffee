@@ -8,7 +8,7 @@ Crafty.c "BackgroundObject",  {
     
     @alpha = info.alpha
     @depth = info.depth
-    this.bind "EnterFrame", this.set_parallax
+    Crafty.bind "ViewPortChanged", this.set_parallax.bind(this)
 
   set_parallax: () ->
     vx = Crafty.viewport.x
