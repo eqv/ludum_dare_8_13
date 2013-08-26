@@ -52,7 +52,7 @@ Crafty.c "ShieldVis", {
 
   hit: () ->
     this.alpha = 1
-    this.tween(alpha: 0, 80)
+    this.tween(alpha: 0, 160)
 
 }
 
