@@ -1,6 +1,6 @@
 Crafty.c "Weapon", {
   init: () ->
-    this.requires "2D, Collision"
+    this.requires "2D, Collision, Delay"
     @arc = 90
     @reload_time = 1
     @charge = @reload_time
@@ -15,7 +15,7 @@ Crafty.c "Weapon", {
     @ship = null
     @box = null
     @last_frame = Date.now()
-    this.bind "EnterFrame", this.on_frame.bind this
+    this.bind "EnterFrame", this.on_frame.bind(this)
 
   weapon: (ship) ->
     @ship = ship
@@ -50,7 +50,9 @@ Crafty.c "Weapon", {
           sp = ship.get_pos()
           if @box.containsPoint sp.x, sp.y
             @charge = 0
-            dir = sp.subtract(new Vec2 @x, @y).scaleToMagnitude(@speed)
-            this.build_bullet(dir.x, dir.y)
+            this.delay( () ->
+              dir = sp.subtract(new Vec2 @x, @y).scaleToMagnitude(@speed)
+              this.build_bullet(dir.x, dir.y)
+            ,100*(@detection_delay||0), 0)
             return
 }

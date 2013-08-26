@@ -15,8 +15,8 @@ Crafty.c "Fighter", {
     @w = 26
     @h = 30
     this.origin("center")
-    @weapons = [Crafty.e("FighterWeapon").attr(x: 17, y: 11, rotation: 0).weapon(this),
-                Crafty.e("FighterWeapon").attr(x: 17, y: 19, rotation: 0).weapon(this)]
+    @weapons = [Crafty.e("FighterWeapon").attr(x: 17, y: 11, rotation: 0, detection_delay: 1).weapon(this),
+                Crafty.e("FighterWeapon").attr(x: 17, y: 19, rotation: 0, detection_delay: 0.0).weapon(this)]
 }
 
 
