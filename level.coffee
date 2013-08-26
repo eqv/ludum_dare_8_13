@@ -4,14 +4,14 @@ currentLevel = null
 levels[1] =
   name: "Devel",
   deco: [
-    { 
+    {
       path: "assets/iris.png"
       x: -100
       y: -100
       alpha: 1
       depth: 0.9
     },
-    { 
+    {
       path: "assets/planet.png"
       x: 100
       y: 100
@@ -118,8 +118,9 @@ class Level
     if @current_team >= @teams.length
       this.animation_phase()
     else
-      @teams[@current_team].planning_turn()
+      team = @teams[@current_team]
       @current_team+=1
+      team.planning_turn()
 
   planning_phase: () ->
     this.check_win_conditions()
