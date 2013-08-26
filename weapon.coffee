@@ -43,7 +43,7 @@ Crafty.c "Weapon", {
       now = Date.now()
       @charge = Math.min @reload_time, @charge + now - @last_frame
       @last_frame = now
-      if @charge >= @reload_time
+      if @charge >= @reload_time and @ship.is_alive()
         for ship in currentLevel.ships
           if ship.team == @ship.team or not ship.is_alive()
             continue
@@ -52,4 +52,4 @@ Crafty.c "Weapon", {
             @charge = 0
             dir = sp.subtract(new Vec2 @x, @y).scaleToMagnitude(@speed)
             this.build_bullet(dir.x, dir.y)
-} 
+}

@@ -2,6 +2,22 @@ levels = []
 currentLevel = null
 
 levels[1] =
+  deco: [
+    { 
+      path: "assets/iris.png"
+      x: -100
+      y: -100
+      alpha: 1
+      depth: 0.9
+    },
+    { 
+      path: "assets/planet.png"
+      x: 100
+      y: 100
+      alpha: 1
+      depth: 0.5
+    }
+  ],
   ships: [
     {
       type: "BattleShip"
@@ -41,6 +57,8 @@ class Level
     @ships = []
     @teams = []
     @teams_by_name = {}
+    for bckg_info,i in lvl.deco
+      Crafty.e("BackgroundObject").backgroundObject( bckg_info)
     for team_desc,i in lvl.teams
         team = Crafty.e(team_desc.type)
         team.name = team_desc.name
