@@ -63,6 +63,33 @@ levels[3] =
     { name: "Team 2", type: "HumanPlayer" }
   ]
 
+levels[4] =
+  name: "Epic Fleet Fight"
+  deco: [
+    { path: "assets/iris.png", x: -100, y: -100, alpha: 1, depth: 0.99 }
+  ],
+  ships: [
+    { type:    "Fighter", x: 200, y: 175, rot:   0, team: "Team 1" },
+    { type:    "Fighter", x: 200, y: 225, rot:   0, team: "Team 1" },
+    { type:    "Cruiser", x: 100, y: 275, rot:   0, team: "Team 1" },
+    { type: "BattleShip", x: 100, y: 350, rot:   0, team: "Team 1" },
+    { type:    "Cruiser", x: 100, y: 425, rot:   0, team: "Team 1" },
+    { type:    "Fighter", x: 200, y: 475, rot:   0, team: "Team 1" },
+    { type:    "Fighter", x: 200, y: 525, rot:   0, team: "Team 1" },
+
+    { type:    "Fighter", x: 800, y: 175, rot: 180, team: "Team 2" },
+    { type:    "Fighter", x: 800, y: 225, rot: 180, team: "Team 2" },
+    { type:    "Cruiser", x: 900, y: 275, rot: 180, team: "Team 2" },
+    { type: "BattleShip", x: 900, y: 350, rot: 180, team: "Team 2" },
+    { type:    "Cruiser", x: 900, y: 425, rot: 180, team: "Team 2" },
+    { type:    "Fighter", x: 800, y: 475, rot: 180, team: "Team 2" },
+    { type:    "Fighter", x: 800, y: 525, rot: 180, team: "Team 2" },
+  ],
+  teams: [
+    { name: "Team 1", type: "HumanPlayer" },
+    { name: "Team 2", type: "HumanPlayer" }
+  ]
+
 class Level
   constructor: (lvl) ->
     @ships = []
@@ -125,9 +152,11 @@ class Level
       if this.get_living_ships_of(team).length > 0
         alive_teams += 1
         window.winner = team
+    if alive_teams <= 0
+      window.winner = { name: "Nobody" }
     if alive_teams <= 1
-      console.log "We have a Winner, going to game_ended scene"
       Crafty.scene("menu")
+      clear_bullet_canvas()
       return true
     return false
 
