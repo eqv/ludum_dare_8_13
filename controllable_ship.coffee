@@ -18,10 +18,7 @@ Crafty.c "ControllableShip", {
       @controller.destroy() if @controller
       @controller = null
       this.removeComponent("ControllableShip")
-
-  }
-
-
+}
 
 Crafty.c "Controller", {
   init: ->
@@ -35,8 +32,7 @@ Crafty.c "Controller", {
     @ship = ship
     pos = @ship.get_pos().add(@ship.get_dir().scale( (@ship.get_min_move_dist()+@ship.get_max_move_dist())/2 ))
     this.set_path(end_pos: pos, center: null, radius: null, end_time: 1)
-    this.x= pos.x
-    this.y= pos.y
+    this.set_pos pos
     this.enableDrag()
     this.bind "DragStart",->Crafty.viewport.lookmouse(false)
     this.bind "DragEnd",->Crafty.viewport.lookmouse(true)
