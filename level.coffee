@@ -56,81 +56,40 @@ levels[1] =
 levels[2] =
   name: "Fun with Fighters",
   deco: [
-    { 
-      path: "assets/iris.png"
-      x: -100
-      y: -100
-      alpha: 1
-      depth: 0.9
-    }
+    { path: "assets/iris.png", x: -100, y: -100, alpha: 1, depth: 0.9 }
   ],
   ships: [
-    {
-      type: "Fighter"
-      x: 70
-      y: 100
-      rot: 0
-      team: "Team 1"
-    },
-    {
-      type: "Fighter"
-      x: 70
-      y: 130
-      rot: 0
-      team: "Team 1"
-    },
-    {
-      type: "Fighter"
-      x: 70
-      y: 160
-      rot: 0
-      team: "Team 1"
-    },
-    {
-      type: "Fighter"
-      x: 70
-      y: 190
-      rot: 0
-      team: "Team 1"
-    },
-    {
-      type: "Fighter"
-      x: 400
-      y: 110
-      rot: 180
-      team: "Team 2"
-    },
-    {
-      type: "Fighter"
-      x: 400
-      y: 140
-      rot: 180
-      team: "Team 2"
-    },
-    {
-      type: "Fighter"
-      x: 400
-      y: 170
-      rot: 180
-      team: "Team 2"
-    },
-    {
-      type: "Fighter"
-      x: 400
-      y: 200
-      rot: 180
-      team: "Team 2"
-    }
+    { type: "Fighter", x: 250, y: 100, rot:   0, team: "Team 1"},
+    { type: "Fighter", x: 250, y: 160, rot:   0, team: "Team 1"},
+    { type: "Fighter", x: 250, y: 220, rot:   0, team: "Team 1"},
+    { type: "Fighter", x: 250, y: 280, rot:   0, team: "Team 1"},
+    { type: "Fighter", x: 800, y: 100, rot: 180, team: "Team 2"},
+    { type: "Fighter", x: 800, y: 160, rot: 180, team: "Team 2"},
+    { type: "Fighter", x: 800, y: 220, rot: 180, team: "Team 2"},
+    { type: "Fighter", x: 800, y: 280, rot: 180, team: "Team 2"},
   ],
   teams: [
-    {
-      name: "Team 1"
-      type: "HumanPlayer"
-    },
-    {
-      name: "Team 2"
-      type: "HumanPlayer"
-    }
+    { name: "Team 1", type: "HumanPlayer" },
+    { name: "Team 2", type: "HumanPlayer" }
+  ]
+
+levels[3] =
+  name: "The Ambush"
+  deco: [
+    { path: "assets/iris.png", x: -100, y: -100, alpha: 1, depth: 0.9 }
+  ],
+  ships: [
+    { type: "Fighter", x:  70, y: 100, rot:  90, team: "Team 1"},
+    { type: "Fighter", x: 120, y: 100, rot:  90, team: "Team 1"},
+    { type: "Fighter", x: 170, y: 100, rot:  90, team: "Team 1"},
+    { type: "Fighter", x: 220, y: 100, rot:  90, team: "Team 1"},
+    { type: "Fighter", x: 270, y: 100, rot:  90, team: "Team 1"},
+    { type: "Cruiser", x: 600, y: 500, rot: 180, team: "Team 2"},
+    { type: "Cruiser", x: 700, y: 500, rot: 180, team: "Team 2"},
+  ],
+  teams: [
+    { name: "Team 1", type: "HumanPlayer" },
+    { name: "Team 2", type: "HumanPlayer" }
   ]
 
 class Level

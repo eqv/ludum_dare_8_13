@@ -1,7 +1,7 @@
 winner = null
 
 buildButton = (label, pos, click_handler) ->
-  entity = Crafty.e("2D, Canvas, Mouse, Text").attr(x : 500, y: 250 + pos * 40, h: 20)
+  entity = Crafty.e("2D, Canvas, Mouse, Text").attr(x : 500, y: 250 + pos * 40, h: 20, w: 100)
   entity.text(label).textColor("#FFFFFF").textFont(family: "Helvetica", size: "20px")
   entity.bind "Click", click_handler
 
