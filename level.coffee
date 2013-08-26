@@ -6,6 +6,12 @@ levels[1] =
   deco: [
     { path: "assets/iris.png", x: -100, y: -100, alpha: 1, depth: 0.99 }
     { path: "assets/planet.png", x: 100, y: 100, alpha: 1, depth: 0.5 }
+    { path: 'assets/tutorial/next_round.png', x: 20,  y: 80,  alpha: 1, depth: 0.1 }
+    { path: 'assets/tutorial/ships.png',      x: 100, y: 20,  alpha: 1, depth: 0.1 },
+    { path: 'assets/tutorial/ship.png',       x: 100, y: 300, alpha: 1, depth: 0.1 }
+    { path: 'assets/tutorial/camera.png',     x: 600, y: 100, alpha: 1, depth: 0.1 }
+    { path: 'assets/tutorial/controller.png', x: 370, y: 280, alpha: 1, depth: 0.1 }
+    { path: 'assets/tutorial/enemy.png',      x: 500, y: 400, alpha: 1, depth: 0.1 }
   ],
   ships: [
     { type: "Cruiser", x: 300, y: 350, rot:   0, team: "Team 1"},
