@@ -18,12 +18,12 @@ Crafty.c "FighterWeapon", {
   init: ->
     this.requires "Weapon"
     @arc = 40
-    @reload_time = 2000
+    @reload_time = 300
     @charge = @reload_time
     @speed = 10
-    @shield_dmg = 2
-    @armor_dmg = 2
-    @duration = 2500
+    @shield_dmg = 0.5
+    @armor_dmg = 0.5
+    @duration = 1000
     @range = 300
     @color_head = "rgba(255,   0,   0, 1)"
     @color_tail = "rgba(255, 255, 255, 0)"

@@ -70,7 +70,7 @@ Crafty.c "Ship", {
     center = steering.center
     radius = steering.radius
 
-    res = {end_pos: target, center: center, radius: radius, end_time: 1}
+    res = {end_pos: target, center: center, radius: radius, end_time: 3}
     if !this.is_valid_target(target, center, radius)
       this.get_closest_valid_target(res)
     #test if the new target is still in front of the spaceship

@@ -7,7 +7,7 @@ Crafty.c "ControllableShip", {
       @controller.controller(this)
     else
       pos = this.get_pos().add(this.get_dir().scale(this.get_min_move_dist()))
-      @keyframes = [{end_pos: pos, center: null, radius: null, end_time: 1}]
+      @keyframes = [{end_pos: pos, center: null, radius: null, end_time: 2}]
 
   controllable_ship_on_click: ->
     this.unbind "Click", this.on_click
@@ -31,7 +31,7 @@ Crafty.c "Controller", {
   controller: (ship) ->
     @ship = ship
     pos = @ship.get_pos().add(@ship.get_dir().scale( (@ship.get_min_move_dist()+@ship.get_max_move_dist())/2 ))
-    this.set_path(end_pos: pos, center: null, radius: null, end_time: 1)
+    this.set_path(end_pos: pos, center: null, radius: null, end_time: 3)
     this.set_pos pos
     this.enableDrag()
     this.bind "DragStart",->Crafty.viewport.lookmouse(false)

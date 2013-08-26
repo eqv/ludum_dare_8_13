@@ -52,4 +52,5 @@ Crafty.c "Weapon", {
             @charge = 0
             dir = sp.subtract(new Vec2 @x, @y).scaleToMagnitude(@speed)
             this.build_bullet(dir.x, dir.y)
+            return
 }
