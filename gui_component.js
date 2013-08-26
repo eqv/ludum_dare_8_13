@@ -108,12 +108,21 @@ Crafty.c("ShipIcon", {
   set_icon: function(icon, ship) {
     if (ship.armor_stat > 0) {
       if ((ship.controller != null) && ship.controller.selected) {
-        return icon.image("" + ship.filename + "_icon_selected.png");
+        if (this.status !== "selected") {
+          icon.image("" + ship.filename + "_icon_selected.png");
+        }
+        return this.status = "selected";
       } else {
-        return icon.image("" + ship.filename + "_icon.png");
+        if (this.status !== "unselected") {
+          icon.image("" + ship.filename + "_icon.png");
+        }
+        return this.status = "unselected";
       }
     } else {
-      return icon.image("" + ship.filename + "_icon_dead.png");
+      if (this.status !== "dead") {
+        icon.image("" + ship.filename + "_icon_dead.png");
+      }
+      return this.status = "dead";
     }
   },
   on_click: function() {
