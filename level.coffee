@@ -14,12 +14,12 @@ levels[1] =
     { path: 'assets/tutorial/enemy.png',      x: 500, y: 400, alpha: 1, depth: 0.1 }
   ],
   ships: [
-    { type: "Cruiser", x: 300, y: 350, rot:   0, team: "Team 1"},
-    { type: "Fighter", x: 700, y: 350, rot: 180, team: "Team 2"},
+    { type: "Cruiser", x: 300, y: 350, rot:   0, team: "Player 1"},
+    { type: "Fighter", x: 700, y: 350, rot: 180, team: "Player 2"},
   ],
   teams: [
-    { name: "Team 1", type: "HumanPlayer" },
-    { name: "Team 2", type: "SittingDuckAI" }
+    { name: "Player 1", type: "HumanPlayer" },
+    { name: "Player 2", type: "SittingDuckAI" }
   ]
 
 levels[2] =
@@ -28,18 +28,18 @@ levels[2] =
     { path: "assets/iris.png", x: -100, y: -100, alpha: 1, depth: 0.99 }
   ],
   ships: [
-    { type: "Fighter", x: 250, y: 100, rot:   0, team: "Team 1"},
-    { type: "Fighter", x: 250, y: 160, rot:   0, team: "Team 1"},
-    { type: "Fighter", x: 250, y: 220, rot:   0, team: "Team 1"},
-    { type: "Fighter", x: 250, y: 280, rot:   0, team: "Team 1"},
-    { type: "Fighter", x: 800, y: 100, rot: 180, team: "Team 2"},
-    { type: "Fighter", x: 800, y: 160, rot: 180, team: "Team 2"},
-    { type: "Fighter", x: 800, y: 220, rot: 180, team: "Team 2"},
-    { type: "Fighter", x: 800, y: 280, rot: 180, team: "Team 2"},
+    { type: "Fighter", x: 250, y: 100, rot:   0, team: "Player 1"},
+    { type: "Fighter", x: 250, y: 160, rot:   0, team: "Player 1"},
+    { type: "Fighter", x: 250, y: 220, rot:   0, team: "Player 1"},
+    { type: "Fighter", x: 250, y: 280, rot:   0, team: "Player 1"},
+    { type: "Fighter", x: 800, y: 100, rot: 180, team: "Player 2"},
+    { type: "Fighter", x: 800, y: 160, rot: 180, team: "Player 2"},
+    { type: "Fighter", x: 800, y: 220, rot: 180, team: "Player 2"},
+    { type: "Fighter", x: 800, y: 280, rot: 180, team: "Player 2"},
   ],
   teams: [
-    { name: "Team 1", type: "HumanPlayer" },
-    { name: "Team 2", type: "HumanPlayer" }
+    { name: "Player 1", type: "HumanPlayer" },
+    { name: "Player 2", type: "HumanPlayer" }
   ]
 
 levels[3] =
@@ -48,19 +48,19 @@ levels[3] =
     { path: "assets/iris.png", x: -100, y: -100, alpha: 1, depth: 0.99 }
   ],
   ships: [
-    { type: "Fighter", x: 650, y: 100, rot: 150, team: "Team 1"},
-    { type: "Fighter", x: 675, y: 150, rot: 150, team: "Team 1"},
-    { type: "Fighter", x: 700, y: 200, rot: 150, team: "Team 1"},
-    { type: "Fighter", x: 700, y: 350, rot: 180, team: "Team 1"},
-    { type: "Fighter", x: 700, y: 500, rot: 210, team: "Team 1"},
-    { type: "Fighter", x: 675, y: 550, rot: 210, team: "Team 1"},
-    { type: "Fighter", x: 650, y: 600, rot: 210, team: "Team 1"},
-    { type: "Cruiser", x: 300, y: 350, rot: 180, team: "Team 2"},
-    { type: "Cruiser", x: 300, y: 400, rot: 180, team: "Team 2"},
+    { type: "Fighter", x: 650, y: 100, rot: 150, team: "Player 1"},
+    { type: "Fighter", x: 675, y: 150, rot: 150, team: "Player 1"},
+    { type: "Fighter", x: 700, y: 200, rot: 150, team: "Player 1"},
+    { type: "Fighter", x: 700, y: 350, rot: 180, team: "Player 1"},
+    { type: "Fighter", x: 700, y: 500, rot: 210, team: "Player 1"},
+    { type: "Fighter", x: 675, y: 550, rot: 210, team: "Player 1"},
+    { type: "Fighter", x: 650, y: 600, rot: 210, team: "Player 1"},
+    { type: "Cruiser", x: 300, y: 350, rot: 180, team: "Player 2"},
+    { type: "Cruiser", x: 300, y: 400, rot: 180, team: "Player 2"},
   ],
   teams: [
-    { name: "Team 1", type: "HumanPlayer" },
-    { name: "Team 2", type: "HumanPlayer" }
+    { name: "Player 1", type: "HumanPlayer" },
+    { name: "Player 2", type: "HumanPlayer" }
   ]
 
 levels[4] =
@@ -69,25 +69,25 @@ levels[4] =
     { path: "assets/iris.png", x: -100, y: -100, alpha: 1, depth: 0.99 }
   ],
   ships: [
-    { type:    "Fighter", x: 200, y: 175, rot:   0, team: "Team 1" },
-    { type:    "Fighter", x: 200, y: 225, rot:   0, team: "Team 1" },
-    { type:    "Cruiser", x: 100, y: 275, rot:   0, team: "Team 1" },
-    { type: "BattleShip", x: 100, y: 350, rot:   0, team: "Team 1" },
-    { type:    "Cruiser", x: 100, y: 425, rot:   0, team: "Team 1" },
-    { type:    "Fighter", x: 200, y: 475, rot:   0, team: "Team 1" },
-    { type:    "Fighter", x: 200, y: 525, rot:   0, team: "Team 1" },
+    { type:    "Fighter", x: 200, y: 175, rot:   0, team: "Player 1" },
+    { type:    "Fighter", x: 200, y: 225, rot:   0, team: "Player 1" },
+    { type:    "Cruiser", x: 100, y: 275, rot:   0, team: "Player 1" },
+    { type: "BattleShip", x: 100, y: 350, rot:   0, team: "Player 1" },
+    { type:    "Cruiser", x: 100, y: 425, rot:   0, team: "Player 1" },
+    { type:    "Fighter", x: 200, y: 475, rot:   0, team: "Player 1" },
+    { type:    "Fighter", x: 200, y: 525, rot:   0, team: "Player 1" },
 
-    { type:    "Fighter", x: 800, y: 175, rot: 180, team: "Team 2" },
-    { type:    "Fighter", x: 800, y: 225, rot: 180, team: "Team 2" },
-    { type:    "Cruiser", x: 900, y: 275, rot: 180, team: "Team 2" },
-    { type: "BattleShip", x: 900, y: 350, rot: 180, team: "Team 2" },
-    { type:    "Cruiser", x: 900, y: 425, rot: 180, team: "Team 2" },
-    { type:    "Fighter", x: 800, y: 475, rot: 180, team: "Team 2" },
-    { type:    "Fighter", x: 800, y: 525, rot: 180, team: "Team 2" },
+    { type:    "Fighter", x: 800, y: 175, rot: 180, team: "Player 2" },
+    { type:    "Fighter", x: 800, y: 225, rot: 180, team: "Player 2" },
+    { type:    "Cruiser", x: 900, y: 275, rot: 180, team: "Player 2" },
+    { type: "BattleShip", x: 900, y: 350, rot: 180, team: "Player 2" },
+    { type:    "Cruiser", x: 900, y: 425, rot: 180, team: "Player 2" },
+    { type:    "Fighter", x: 800, y: 475, rot: 180, team: "Player 2" },
+    { type:    "Fighter", x: 800, y: 525, rot: 180, team: "Player 2" },
   ],
   teams: [
-    { name: "Team 1", type: "HumanPlayer" },
-    { name: "Team 2", type: "HumanPlayer" }
+    { name: "Player 1", type: "HumanPlayer" },
+    { name: "Player 2", type: "HumanPlayer" }
   ]
 
 class Level

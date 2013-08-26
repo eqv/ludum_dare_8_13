@@ -50,9 +50,9 @@ Crafty.c "HumanPlayer", {
     this.requires "Team"
 
   perform_planning: () ->
-    if this.name == "Team 1"
+    if this.name == "Player 1"
       Crafty.e("FadingImage").fadingImage("assets/player1.png")
-    else if this.name == "Team 2"
+    else if this.name == "Player 2"
       Crafty.e("FadingImage").fadingImage("assets/player2.png")
     else
       console.log "unknown team", this.name
