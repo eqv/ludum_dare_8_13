@@ -24,10 +24,9 @@ Crafty.c "RestrictedDraggable", {
         return false;
       next_x = this._oldX + (pos.x - this._origMouseDOMPos.x);
       next_y = this._oldY + (pos.y - this._origMouseDOMPos.y);
-      vec = this.is_valid_drag_position(next_x,next_y)
+      vec = this.is_valid_drag_position(next_x, next_y)
       if vec
-        this.x = vec.x
-        this.y = vec.y
+        this.set_pos vec
         this.trigger("Dragging", e);
 
   _ondown: (e) ->
@@ -52,8 +51,8 @@ Crafty.c "RestrictedDraggable", {
   #/
   _startDrag: (e) ->
     this._origMouseDOMPos = Crafty.DOM.translate(e.clientX, e.clientY);
-    this._oldX = this._x;
-    this._oldY = this._y;
+    this._oldX = this.get_pos().x
+    this._oldY = this.get_pos().y
     this._dragging = true;
 
     Crafty.addEvent(this, Crafty.stage.elem, "mousemove", this._ondrag);
