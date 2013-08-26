@@ -49,11 +49,11 @@ Crafty.c "Cruiser", {
 Crafty.c "BattleShip", {
   init: ->
     @filename = "assets/battleship"
-    @max_speed = 100
+    @max_speed = 120
     @min_speed = 20
     @min_turn_radius = 180
-    @armor = 50
-    @shields = 50
+    @armor = 40
+    @shields = 40
     @shield_regen = 10
     #you should put this at the end, otherwise initialization of the other
     #components that depend on th ships characteristics fail
