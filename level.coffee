@@ -25,30 +25,30 @@ levels[1] =
       x: 320
       y: 240
       rot: 20
-      team: "coco"
+      team: "Team 2"
     },
     {
       type: "Cruiser"
       x: 150
       y: 100
       rot: 90
-      team: "eugen"
+      team: "Team 1"
     },
     {
       type: "Fighter"
       x: 100
       y: 120
       rot: 30
-      team: "eugen"
+      team: "Team 1"
     }
   ],
   teams: [
     {
-      name: "eugen"
+      name: "Team 1"
       type: "HumanPlayer"
     },
     {
-      name: "coco"
+      name: "Team 2"
       type: "HumanPlayer"
     }
   ]
@@ -70,65 +70,65 @@ levels[2] =
       x: 70
       y: 100
       rot: 0
-      team: "eugen"
+      team: "Team 1"
     },
     {
       type: "Fighter"
       x: 70
       y: 130
       rot: 0
-      team: "eugen"
+      team: "Team 1"
     },
     {
       type: "Fighter"
       x: 70
       y: 160
       rot: 0
-      team: "eugen"
+      team: "Team 1"
     },
     {
       type: "Fighter"
       x: 70
       y: 190
       rot: 0
-      team: "eugen"
+      team: "Team 1"
     },
     {
       type: "Fighter"
       x: 400
       y: 110
       rot: 180
-      team: "coco"
+      team: "Team 2"
     },
     {
       type: "Fighter"
       x: 400
       y: 140
       rot: 180
-      team: "coco"
+      team: "Team 2"
     },
     {
       type: "Fighter"
       x: 400
       y: 170
       rot: 180
-      team: "coco"
+      team: "Team 2"
     },
     {
       type: "Fighter"
       x: 400
       y: 200
       rot: 180
-      team: "coco"
+      team: "Team 2"
     }
   ],
   teams: [
     {
-      name: "eugen"
+      name: "Team 1"
       type: "HumanPlayer"
     },
     {
-      name: "coco"
+      name: "Team 2"
       type: "HumanPlayer"
     }
   ]
@@ -194,7 +194,8 @@ class Level
         alive_teams += 1
     if alive_teams <= 1
       console.log "We have a Winner, going to game_ended scene"
-      Crafty.scene("game_ended")
+      window.winner = team
+      Crafty.scene("menu")
       return true
     return false
 
