@@ -86,11 +86,14 @@ Crafty.c "ShipIcon", {
   set_icon: (icon, ship)->
     if ship.armor_stat > 0
       if ship.controller? and ship.controller.selected
-        icon.image("#{ship.filename}_icon_selected.png")
+        icon.image("#{ship.filename}_icon_selected.png") if @status != "selected"
+        @status = "selected"
       else
-        icon.image("#{ship.filename}_icon.png")
+        icon.image("#{ship.filename}_icon.png") if @status != "unselected"
+        @status = "unselected"
     else
-      icon.image("#{ship.filename}_icon_dead.png")
+      icon.image("#{ship.filename}_icon_dead.png") if @status != "dead"
+      @status = "dead"
 
 
   on_click: ->
