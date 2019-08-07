@@ -1,3 +1,8 @@
+Vec2 = Crafty.math.Vector2D
+
+degToRad = (deg) ->
+  return deg*Math.PI/180
+
 Crafty.c "Weapon", {
   init: () ->
     this.requires "2D, Collision, Delay"
@@ -39,12 +44,12 @@ Crafty.c "Weapon", {
                            ).bullet(@ship.team)
 
   on_frame: () ->
-    if currentLevel? and currentLevel.state == "animating"
+    if window.currentLevel? and window.currentLevel.state == "animating"
       now = Date.now()
       @charge = Math.min @reload_time, @charge + now - @last_frame
       @last_frame = now
       if @charge >= @reload_time and @ship.is_alive()
-        for ship in currentLevel.ships
+        for ship in window.currentLevel.ships
           if ship.team == @ship.team or not ship.is_alive()
             continue
           sp = ship.get_pos()

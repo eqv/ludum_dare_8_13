@@ -16,6 +16,6 @@ Crafty.scene "menu", () ->
   if winner
     Crafty.e("2D, Canvas, Text").attr(x : 400, y: 180, h: 30).text(winner.name + " has won")
           .textColor("#FFFFFF").textFont(family: "Helvetica", size: "30px")
-  for i in [1..levels.length-1]
+  for i in [1..window.levels.length-1]
     name = if window.levels[i] then ": " + window.levels[i].name else ""
     buildButton "Level " + i + name, i - 1, load_level.bind(null, i)

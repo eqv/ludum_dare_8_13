@@ -1,3 +1,8 @@
+Vec2 = Crafty.math.Vector2D
+
+radToDeg = (rad) ->
+  return rad*180/Math.PI
+
 Crafty.c "ControllableShip", {
   init: ->
     this.requires "Ship, Mouse"

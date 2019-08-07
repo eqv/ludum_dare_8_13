@@ -1,3 +1,5 @@
+Vec2 = Crafty.math.Vector2D
+
 Crafty.c "Centered", {
   get_pos: ()->
     return new Vec2(@x+@w/2,@y+@h/2)

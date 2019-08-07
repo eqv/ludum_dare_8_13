@@ -32,7 +32,7 @@ Crafty.c "NextTurnButton", {
   on_click: (e) ->
     count_unused_ships = 0
     @team.cleanup_planning()
-    currentLevel.next_planning_turn()
+    window.currentLevel.next_planning_turn()
   }
 
 Crafty.c "StatusBar", {

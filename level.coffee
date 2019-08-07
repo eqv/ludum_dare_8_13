@@ -1,7 +1,7 @@
-levels = []
-currentLevel = null
+window.levels = []
+window.currentLevel = null
 
-levels[1] =
+window.levels[1] =
   name: "Training",
   deco: [
     { path: "assets/iris.png", x: -100, y: -100, alpha: 1, depth: 0.99 }
@@ -22,7 +22,7 @@ levels[1] =
     { name: "Player 2", type: "SittingDuckAI" }
   ]
 
-levels[2] =
+window.levels[2] =
   name: "Fun with Fighters",
   deco: [
     { path: "assets/iris.png", x: -100, y: -100, alpha: 1, depth: 0.99 }
@@ -42,7 +42,7 @@ levels[2] =
     { name: "Player 2", type: "HumanPlayer" }
   ]
 
-levels[3] =
+window.levels[3] =
   name: "The Ambush"
   deco: [
     { path: "assets/iris.png", x: -100, y: -100, alpha: 1, depth: 0.99 }
@@ -63,7 +63,7 @@ levels[3] =
     { name: "Player 2", type: "HumanPlayer" }
   ]
 
-levels[4] =
+window.levels[4] =
   name: "Epic Fleet Fight"
   deco: [
     { path: "assets/iris.png", x: -100, y: -100, alpha: 1, depth: 0.99 }
@@ -156,7 +156,7 @@ class Level
       window.winner = { name: "Nobody" }
     if alive_teams <= 1
       Crafty.scene("menu")
-      clear_bullet_canvas()
+      window.clear_bullet_canvas()
       return true
     return false
 
@@ -164,8 +164,8 @@ class Level
     return (ship for ship in team.fleet when ship.is_alive())
 
 startScene = (i) ->
-  currentLevel = new Level levels[i]
+  window.currentLevel = new Level levels[i]
   Crafty.viewport.mouselook(true)
-  currentLevel.planning_phase()
+  window.currentLevel.planning_phase()
 
 Crafty.scene("level_" + i, startScene.bind(null, i)) for i in [1..levels.length-1]

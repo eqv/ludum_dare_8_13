@@ -1,3 +1,8 @@
+Vec2 = Crafty.math.Vector2D
+
+degToRad = (deg) ->
+  return deg*Math.PI/180
+
 Crafty.c "Damagable", {
   init: () ->
     @armor_stat = @armor

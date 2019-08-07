@@ -28,7 +28,7 @@ Crafty.c "SittingDuckAI", {
   perform_planning: () ->
     for ship in @fleet
       ship.keyframes = [{end_pos: ship.get_pos(), center: null, radius: null, end_time: 3}]
-    currentLevel.next_planning_turn()
+    window.currentLevel.next_planning_turn()
 
 }
 

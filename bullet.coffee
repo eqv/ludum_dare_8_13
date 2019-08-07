@@ -1,6 +1,8 @@
+Vec2 = Crafty.math.Vector2D
+
 bullet_last_update = 0
 
-clear_bullet_canvas = () ->
+window.clear_bullet_canvas = () ->
   c = $("#bullet_canvas")[0]
   if c?
     ctx = c.getContext "2d"
@@ -55,11 +57,11 @@ Crafty.c "Bullet", {
   on_frame: (e) ->
     if bullet_last_update < e.frame
       bullet_last_update = e.frame
-      clear_bullet_canvas()
+      window.clear_bullet_canvas()
 
-    if currentLevel.state == "planning"
+    if window.currentLevel.state == "planning"
       this.stop()
-    else if currentLevel.state == "animating"
+    else if window.currentLevel.state == "animating"
       this.start()
 
     @now = if @animating then Date.now() else @now

@@ -1,3 +1,5 @@
+Vec2 = Crafty.math.Vector2D
+
 Crafty.c "BackgroundObject",  {
   backgroundObject: (info) ->
     this.requires "2D, Canvas, Image"
